@@ -100,29 +100,34 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                 getTextField(controller: _estado),
 
                 SizedBox(height: 10.0),
+                getTextQuestion(question: 'Tipo de Asentamiento'),
+              //Menu desplegable
                 Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        child: getTextQuestion(question: 'Tipo de Asentamiento'),
-                      ),
-                      //Menu desplegable
-                      Container(
-                        child: SearchField(
-                          suggestionState: Suggestion.expand,
-                          suggestionAction: SuggestionAction.next,
-                          suggestions: _NombreAsentamiento.map((nombreAsentamiento) =>
-                              SearchFieldListItem(nombreAsentamiento.Nombre, item: nombreAsentamiento)).toList(),
-                          textInputAction: TextInputAction.next,
-                          controller: _tipoAsentamiento,
-                          maxSuggestionsInViewPort: 3,
-                          itemHeight: 45,
-                          onSuggestionTap: (x){},
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: SearchField(
+                    suggestionState: Suggestion.hidden,
+                    searchInputDecoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
                         ),
                       ),
-                    ],
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[120],
+                    ),
+                    suggestions: _NombreAsentamiento.map((nombreAsentamiento) =>
+                        SearchFieldListItem(nombreAsentamiento.Nombre, item: nombreAsentamiento)).toList(),
+                    textInputAction: TextInputAction.next,
+                    controller: _nombreAsentamiento,
+                    maxSuggestionsInViewPort: 3,
+                    itemHeight: 45,
+                    onSuggestionTap: (x){},
                   ),
                 ),
+
                 SizedBox(height: 5.0),
 
                 SizedBox(height: 10.0),
@@ -145,13 +150,25 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                 SizedBox(height: 5.0),
                 //Menu desplegable
                 Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: SearchField(
-                    suggestionState: Suggestion.expand,
-                    suggestionAction: SuggestionAction.next,
+                    suggestionState: Suggestion.hidden,
+                    searchInputDecoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[120],
+                    ),
                     suggestions: _NombreAsentamiento.map((nombreAsentamiento) =>
                         SearchFieldListItem(nombreAsentamiento.Nombre, item: nombreAsentamiento)).toList(),
                     textInputAction: TextInputAction.next,
-                    controller: _tipoAsentamiento,
+                    controller: _nombreAsentamiento,
                     maxSuggestionsInViewPort: 3,
                     itemHeight: 45,
                     onSuggestionTap: (x){},
@@ -161,6 +178,7 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Nombre del Asentamiento'),
                 SizedBox(height: 5.0),
+                //Menu desplegable
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: SearchField(
@@ -174,8 +192,11 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                         borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
                         ),
                       ),
+                      filled: true,
+                      fillColor: Colors.grey[120],
                     ),
-                    suggestions: _names.map((e) => SearchFieldListItem(e)).toList(),
+                    suggestions: _NombreAsentamiento.map((nombreAsentamiento) =>
+                        SearchFieldListItem(nombreAsentamiento.Nombre, item: nombreAsentamiento)).toList(),
                     textInputAction: TextInputAction.next,
                     controller: _nombreAsentamiento,
                     maxSuggestionsInViewPort: 3,
@@ -227,13 +248,27 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Tipo de Vialidad'),
                 SizedBox(height: 5.0),
+                //Menu desplegable
                 Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: SearchField(
-                    suggestionState: Suggestion.expand,
-                    suggestionAction: SuggestionAction.next,
-                    suggestions: _names.map((e) => SearchFieldListItem(e)).toList(),
+                    suggestionState: Suggestion.hidden,
+                    searchInputDecoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[120],
+                    ),
+                    suggestions: _NombreAsentamiento.map((nombreAsentamiento) =>
+                        SearchFieldListItem(nombreAsentamiento.Nombre, item: nombreAsentamiento)).toList(),
                     textInputAction: TextInputAction.next,
-                    controller: _tipoVialidad,
+                    controller: _nombreAsentamiento,
                     maxSuggestionsInViewPort: 3,
                     itemHeight: 45,
                     onSuggestionTap: (x){},
@@ -243,18 +278,33 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Código Postal'),
                 SizedBox(height: 5.0),
+                //Menu desplegable
                 Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: SearchField(
-                    suggestionState: Suggestion.expand,
-                    suggestionAction: SuggestionAction.next,
-                    suggestions: _names.map((e) => SearchFieldListItem(e)).toList(),
+                    suggestionState: Suggestion.hidden,
+                    searchInputDecoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[120],
+                    ),
+                    suggestions: _NombreAsentamiento.map((nombreAsentamiento) =>
+                        SearchFieldListItem(nombreAsentamiento.Nombre, item: nombreAsentamiento)).toList(),
                     textInputAction: TextInputAction.next,
-                    controller: _cp,
+                    controller: _nombreAsentamiento,
                     maxSuggestionsInViewPort: 3,
                     itemHeight: 45,
                     onSuggestionTap: (x){},
                   ),
                 ),
+
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Télefono (10 digitos)'),
                 SizedBox(height: 5.0),

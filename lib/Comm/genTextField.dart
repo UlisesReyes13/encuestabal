@@ -22,7 +22,7 @@ class getTextField extends StatelessWidget {
               borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
               ),
             ),
-            fillColor: Colors.grey[200],
+            fillColor: Colors.grey[120],
             filled: true
         ),
       ),
