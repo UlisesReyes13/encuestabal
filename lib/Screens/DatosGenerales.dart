@@ -1,9 +1,12 @@
+import 'package:encuestabal/Screens/LoginForm.dart';
+import 'package:encuestabal/Screens/ServiciosBanios.dart';
 import 'package:flutter/material.dart';
 import 'package:encuestabal/Comm/genTextField.dart';
 import 'package:encuestabal/Comm/genTextFormField.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
 import 'package:searchfield/searchfield.dart';
 import 'package:encuestabal/Model/NombreAsentamiento.dart';
+import 'package:intl/intl.dart';
 
 class DatosGenerales extends StatefulWidget {
 
@@ -49,6 +52,15 @@ class _DatosGeneralesState extends State<DatosGenerales> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Datos Generales'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => LoginForm()),
+                    (Route<dynamic> route) => false);
+          },
+        ),
       ),
       body: Form(
         child: SingleChildScrollView(
@@ -66,27 +78,35 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Fecha Captura'),
                 SizedBox(height: 5.0),
-                getTextField(
-                    controller: _fechaCaptura
-                ),
-
                 Container(
-                  margin: EdgeInsets.all(10.0),
-                  child: FlatButton(
-                    child: Text('Seleccionar Fecha', style: TextStyle(
-                        color: Colors.white
-                    )
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextField(
+                    controller: _fechaCaptura,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                          ),
+                        ),
+                        fillColor: Colors.grey[120],
+                        filled: true
                     ),
-                    onPressed: () async {
-                      showDatePicker(context: context,
+                    onTap: () async{
+                      DateTime pickeddate = await showDatePicker(
+                          context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime.now());
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100));
+
+                      if(pickeddate != null){
+                        setState(() {
+                          _fechaCaptura.text = DateFormat('yyyy-MM-dd').format(pickeddate);
+                        });
+                      }
                     },
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
                 SizedBox(height: 10.0),
@@ -218,25 +238,35 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Fecha'),
                 SizedBox(height: 5.0),
-                getTextField(controller: _fecha),
-
                 Container(
-                  margin: EdgeInsets.all(10.0),
-                  child: FlatButton(
-                    child: Text('Seleccionar Fecha', style: TextStyle(
-                        color: Colors.white
-                    )
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextField(
+                    controller: _fecha,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                          ),
+                        ),
+                        fillColor: Colors.grey[120],
+                        filled: true
                     ),
-                    onPressed: () async {
-                      showDatePicker(context: context,
+                    onTap: () async{
+                      DateTime pickeddate = await showDatePicker(
+                          context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime.now());
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100));
+
+                      if(pickeddate != null){
+                        setState(() {
+                          _fecha.text = DateFormat('yyyy-MM-dd').format(pickeddate);
+                        });
+                      }
                     },
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
 
@@ -312,8 +342,15 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                 SizedBox(height: 10.0),
 
                 Container(
+                  margin: EdgeInsets.all(20.0),
+                  width: double.infinity,
                   child: FlatButton.icon(
-                      onPressed:enviar,
+                      onPressed:(){
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (_) => ServiciosBanios()),
+                                (Route<dynamic> route) => false);
+                      },
                       icon: Icon(Icons.arrow_forward,color: Colors.white,),
                       label: Text('Continuar', style: TextStyle(color: Colors.white)
                         ,)
@@ -321,9 +358,8 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                   decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(30.0),
-
                   ),
-                )
+                ),
               ],
             ) ,
           ),
