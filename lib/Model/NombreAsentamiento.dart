@@ -1,6 +1,16 @@
-
 class NombreAsentamiento {
-  final int id;
-  final String Nombre;
-  NombreAsentamiento(this.id, this.Nombre);
+   String NombreAsentamientos;
+
+
+   NombreAsentamiento({this.NombreAsentamientos});
+
+  Map<String, dynamic> toMap() {
+    return{
+      'NombreAsentamientos': NombreAsentamientos,
+    };
+  }
+
+   NombreAsentamiento.fromMap(Map<String, dynamic> map){
+     NombreAsentamientos = map['NombreAsentamientos'];
+   }
 }
