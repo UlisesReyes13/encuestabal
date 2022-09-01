@@ -74,9 +74,7 @@ class DbHelper {
     await db.execute("CREATE TABLE $Table_Data ($C_Folio INTEGER not null Primary key AUTOINCREMENT ,$C_FechaCaptura TEXT, $C_Calle TEXT, $C_EntreCalles TEXT, $C_Grupo TEXT,$C_NoExt TEXT,$C_NoInt TEXT,$C_Fecha TEXT,$C_Localidad TEXT,$C_Telefono TEXT,$C_CP TEXT,$C_ClaveEstado TEXT,$C_Estado TEXT, $C_NombreComunidad TEXT, $C_ClaveMunicipio TEXT,$C_Municipio TEXT,$C_ClaveAsentamiento TEXT,$C_NombreAsentamiento TEXT ,$C_ClaveTipoAsentamiento TEXT, $C_OrdenTipoAsentamiento TEXT, $C_TipoAsentamiento TEXT, $C_ClaveTipoVialidad TEXT, $C_OrdenTipoVialidad TEXT, $C_TipoVialidad TEXT);");
 
     //NOMBRE ASENTAMIENTO
-
     await db.execute("CREATE TABLE Asentamientos (NombreAsentamientos TEXT);");
-
     await db.execute("INSERT INTO Asentamientos (NombreAsentamientos) VALUES ('1 HEROES DE LEON');");
     await db.execute("INSERT INTO Asentamientos (NombreAsentamientos) VALUES ('2 FRACCIONAMIENTO DEL MORAL DOS');");
     await db.execute("INSERT INTO Asentamientos (NombreAsentamientos) VALUES ('3 TIERRAS PRIETAS');");

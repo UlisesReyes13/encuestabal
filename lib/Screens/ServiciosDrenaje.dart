@@ -19,6 +19,32 @@ class ServiciosDrenaje extends StatefulWidget {
 class _ServiciosDrenajeState extends State<ServiciosDrenaje> {
   ServDrenaje _drenaje = ServDrenaje.redPublica;
 
+  enviar(){
+    String drenaje = _drenaje.name.toString();
+
+    if(drenaje == 'redPublica'){
+      drenaje = 'Red Pública';
+    }else if(drenaje == 'fosaSeptica'){
+      drenaje = 'Fosa Séptica';
+    }else if(drenaje == 'tuberiaGrieta'){
+      drenaje = 'Tubería que va a dar a una grieta';
+    }else if(drenaje == 'otro'){
+      drenaje = 'Otro';
+    }else if(drenaje == 'sinServicio'){
+      drenaje = 'Sin Servicio';
+    }else if(drenaje == 'noTiene'){
+      drenaje = 'No tiene';
+    }else if(drenaje == 'tuberiaRio'){
+      drenaje = 'Tubería que va a dar a un río';
+    }else if(drenaje == 'rasSuelo'){
+      drenaje = 'Ras de Suelo';
+    }else if(drenaje == 'letrina'){
+      drenaje = 'Letrina';
+    }else if(drenaje == 'drenaje'){
+      drenaje = 'Drenaje';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

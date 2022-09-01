@@ -16,8 +16,28 @@ class ServiciosCombustible extends StatefulWidget {
   State<ServiciosCombustible> createState() => _ServiciosCombustibleState();
 }
 
+
 class _ServiciosCombustibleState extends State<ServiciosCombustible> {
   ServCombustible _combustible = ServCombustible.gasTanque;
+
+  enviar(){
+    String combustible = _combustible.name.toString();
+    if(combustible == 'gasTanque'){
+      combustible = 'Gas tanque';
+    }else if(combustible == 'gasNatural'){
+      combustible = 'Gas Natural';
+    }else if(combustible == 'parrillaElectrica'){
+      combustible = 'Parrilla Electrica';
+    }else if(combustible == 'leniaChimenea'){
+      combustible = 'Leña o Carbón con Chimenea';
+    }else if(combustible == 'leniaSinChimenea'){
+      combustible = 'Leña o Carbón sin Chimenea';
+    }else if(combustible == 'otroCombustible') {
+      combustible = 'Otro Combustible';
+    }else if(combustible == 'ninguno'){
+      combustible = 'Ninguno';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
