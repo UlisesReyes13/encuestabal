@@ -1,11 +1,16 @@
+import 'package:encuestabal/Comm/genTextFolio.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
 import 'package:encuestabal/Screens/ServiciosLuz.dart';
 import 'package:flutter/material.dart';
 import 'package:encuestabal/Screens/ServiciosDrenaje.dart';
+
 enum ServAgua {tomaDomiciliaria, tomaComun, pipa, pozo_rio_lago, llavePublica,
 acarreoVivienda, otraFuente, ninguna, noTiene, otro}
 
 class ServiciosAgua extends StatefulWidget {
+
+  String folio;
+  ServiciosAgua(this.folio);
 
   @override
   State<ServiciosAgua> createState() => _ServiciosAguaState();
@@ -14,6 +19,29 @@ class ServiciosAgua extends StatefulWidget {
 class _ServiciosAguaState extends State<ServiciosAgua> {
 
   ServAgua _agua= ServAgua.tomaDomiciliaria;
+
+  enviar(){
+    String agua = _agua.name.toString();
+    if(agua == 'tomaDomiciliaria'){
+      agua = 'Toma Domiciliaria';
+    }else if(agua == 'tomaComun'){
+      agua  = 'Toma Común o Fuera de Vivienda';
+    }else if(agua == 'pipa'){
+      agua = 'Pipa';
+    }else if(agua == 'pozo_rio_lago'){
+      agua = 'Pozo, Río, Lago';
+    }else if(agua == 'llavePublica'){
+      agua = 'Llave Publica';
+    }else if(agua == 'otraFuente'){
+      agua = 'Otra Fuente';
+    }else if(agua == 'ninguna'){
+      agua = 'Ninguna';
+    }else if(agua == 'noTiene'){
+      agua = 'No tiene';
+    }else if(agua == 'otro'){
+      agua = 'Otro';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +53,7 @@ class _ServiciosAguaState extends State<ServiciosAgua> {
           onPressed: (){
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (_) => ServiciosLuz()),
+                MaterialPageRoute(builder: (_) => ServiciosLuz(widget.folio)),
                     (Route<dynamic> route) => false);
           },
         ),
@@ -37,6 +65,10 @@ class _ServiciosAguaState extends State<ServiciosAgua> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                SizedBox(height: 5.0),
+                getTextFolio(controller: TextEditingController.fromValue(
+                    TextEditingValue(text: widget.folio))
+                ),
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'AGUA'),
                 SizedBox(height: 5.0),
@@ -166,10 +198,10 @@ class _ServiciosAguaState extends State<ServiciosAgua> {
                   width: double.infinity,
                   child: FlatButton.icon(
                     onPressed: (){
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (_) => ServiosDrenaje()),
-                              (Route<dynamic> route) => false);
+                      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+                        return new ServiciosDrenaje(widget.folio);
+                      }
+                      ));
                     },
                     icon: Icon(Icons.arrow_forward,color: Colors.white),
                     label: Text('Continuar', style: TextStyle(color: Colors.white),),

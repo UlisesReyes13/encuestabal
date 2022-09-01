@@ -8,6 +8,10 @@ enum ServCombustible {gasTanque, gasNatural, parrillaElectrica,
 
 class ServiciosCombustible extends StatefulWidget {
 
+  String folio;
+
+  ServiciosCombustible(this.folio);
+
   @override
   State<ServiciosCombustible> createState() => _ServiciosCombustibleState();
 }
@@ -25,7 +29,7 @@ class _ServiciosCombustibleState extends State<ServiciosCombustible> {
           onPressed: (){
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (_) => ServiosDrenaje()),
+                MaterialPageRoute(builder: (_) => ServiciosDrenaje(widget.folio)),
                     (Route<dynamic> route) => false);
           },
         ),
@@ -131,10 +135,10 @@ class _ServiciosCombustibleState extends State<ServiciosCombustible> {
                   width: double.infinity,
                   child: FlatButton.icon(
                     onPressed: (){
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (_) => EstructuraFamiliar()),
-                              (Route<dynamic> route) => false);
+                      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+                        return new EstructuraFamiliar();
+                      }
+                      ));
                     },
                     icon: Icon(Icons.arrow_forward,color: Colors.white),
                     label: Text('Continuar', style: TextStyle(color: Colors.white),),

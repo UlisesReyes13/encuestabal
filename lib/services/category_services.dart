@@ -7,7 +7,7 @@ class CategoryService {
   }
 
   readCtegoriesNomAsen() async {
-    return await _repository.readData('tb_Asentamientos');
+    return await _repository.readData('Asentamientos');
   }
 
   readCtegoriesTipoVialidad() async {

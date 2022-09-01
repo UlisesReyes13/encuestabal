@@ -455,10 +455,6 @@ class _DatosGeneralesState extends State<DatosGenerales> {
     var claveTipoViali = claveTipoVia.substring(0,2);
 
 
-    print(ClaveMuni.trimRight().toString() + " " + nomMunicipio.trimLeft() + " " +
-        claveAse.trimRight().toString() + " " + tipoAsenta.trimLeft() + " " + claveTipoAsentamien.toString()
-        + " " + nombreTipoVialidad.trimRight() + " " + claveTipoViali.toString() + " " + nombreTipoVialidad.trimRight());
-
     DatosGeneralesModel DModel = DatosGeneralesModel
       (int.parse(folio),
         fechaCaptura,
@@ -488,8 +484,10 @@ class _DatosGeneralesState extends State<DatosGenerales> {
     await dbHelper.saveDatosGenerales(DModel).then((datosGeneralesData) {
       alertDialog(context, "Se registro correctamente");
 
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => ServiciosBanios()));
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+        return new ServiciosBanios(folio);
+        }
+      ));
     }).catchError((error) {
       print(error);
       alertDialog(context, "Error: No se guardaron los datos");

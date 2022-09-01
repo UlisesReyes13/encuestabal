@@ -3,9 +3,14 @@ import 'package:encuestabal/Screens/ServiciosAgua.dart';
 import 'package:encuestabal/Screens/ServiciosBanios.dart';
 import 'package:flutter/material.dart';
 
+import '../Comm/genTextFolio.dart';
+
 enum ServLuz {servicioPublico, sinContrato, plantaParticular, panelSolar,
 otro, sinServicio, noTiene, conContrato}
 class ServiciosLuz extends StatefulWidget {
+
+  String folio;
+  ServiciosLuz(this.folio);
 
   @override
   State<ServiciosLuz> createState() => _ServiciosLuzState();
@@ -14,6 +19,26 @@ class ServiciosLuz extends StatefulWidget {
 class _ServiciosLuzState extends State<ServiciosLuz> {
 
   ServLuz _luz = ServLuz.servicioPublico;
+  enviar(){
+    String luz = _luz.name.toString();
+    if (luz == 'servicioPublico') {
+      luz = 'Servicio Público';
+    }else if(luz == 'sinContrato'){
+      luz = 'Sin Contrato';
+    }else if(luz == 'plantaParticular'){
+      luz = 'Planta Particular';
+    }else if(luz == 'panelSolar'){
+      luz = 'Panel Solar';
+    }else if(luz == 'otro'){
+      luz = 'Otro';
+    }else if(luz == 'sinServicio'){
+      luz = 'Sin Servicio';
+    }else if(luz == 'noTiene'){
+      luz = 'No tiene';
+    }else if(luz == 'conContrato'){
+      luz = 'Con Contrato';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +50,7 @@ class _ServiciosLuzState extends State<ServiciosLuz> {
           onPressed: (){
             Navigator.pushAndRemoveUntil(
                 context ,
-                MaterialPageRoute(builder: (_) => ServiciosBanios()),
+                MaterialPageRoute(builder: (_) => ServiciosBanios(widget.folio)),
                     (Route<dynamic> route) => false);
           },
         ),
@@ -37,6 +62,10 @@ class _ServiciosLuzState extends State<ServiciosLuz> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                SizedBox(height: 5.0),
+                getTextFolio(controller: TextEditingController.fromValue(
+                    TextEditingValue(text: widget.folio))
+                ),
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Luz'),
                 SizedBox(height: 5.0),
@@ -142,10 +171,10 @@ class _ServiciosLuzState extends State<ServiciosLuz> {
                   width: double.infinity,
                   child: FlatButton.icon(
                     onPressed: (){
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (_) => ServiciosAgua()),
-                              (Route<dynamic> route) => false);
+                      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+                        return new ServiciosAgua(widget.folio);
+                        }
+                      ));
                     },
                     icon: Icon(Icons.arrow_forward,color: Colors.white),
                     label: Text('Continuar', style: TextStyle(color: Colors.white),),

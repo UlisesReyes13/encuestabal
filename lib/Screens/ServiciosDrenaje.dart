@@ -1,3 +1,4 @@
+import 'package:encuestabal/Comm/genTextFolio.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
 import 'package:encuestabal/Screens/ServiciosAgua.dart';
 import 'package:encuestabal/Screens/ServiciosCombustible.dart';
@@ -6,13 +7,16 @@ import 'package:flutter/material.dart';
 enum ServDrenaje {redPublica, fosaSeptica, tuberiaGrieta, otro, sinServicio,
 noTiene, tuberiaRio, rasSuelo, letrina, drenaje}
 
-class ServiosDrenaje extends StatefulWidget {
+class ServiciosDrenaje extends StatefulWidget {
+
+  String folio;
+  ServiciosDrenaje(this.folio);
 
   @override
-  State<ServiosDrenaje> createState() => _ServiosDrenajeState();
+  State<ServiciosDrenaje> createState() => _ServiciosDrenajeState();
 }
 
-class _ServiosDrenajeState extends State<ServiosDrenaje> {
+class _ServiciosDrenajeState extends State<ServiciosDrenaje> {
   ServDrenaje _drenaje = ServDrenaje.redPublica;
 
   @override
@@ -25,7 +29,7 @@ class _ServiosDrenajeState extends State<ServiosDrenaje> {
           onPressed: (){
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (_) => ServiciosAgua()),
+                MaterialPageRoute(builder: (_) => ServiciosAgua(widget.folio)),
                     (Route<dynamic> route) => false);
           },
         ),
@@ -37,6 +41,10 @@ class _ServiosDrenajeState extends State<ServiosDrenaje> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                SizedBox(height: 5.0),
+                getTextFolio(controller: TextEditingController.fromValue(
+                    TextEditingValue(text: widget.folio))
+                ),
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Drenaje'),
                 SizedBox(height: 5.0),
@@ -166,10 +174,10 @@ class _ServiosDrenajeState extends State<ServiosDrenaje> {
                   width: double.infinity,
                   child: FlatButton.icon(
                     onPressed: (){
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (_) => ServiciosCombustible()),
-                              (Route<dynamic> route) => false);
+                      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+                        return new ServiciosCombustible(widget.folio);
+                      }
+                      ));
                     },
                     icon: Icon(Icons.arrow_forward,color: Colors.white),
                     label: Text('Continuar', style: TextStyle(color: Colors.white),),
