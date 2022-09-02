@@ -23,21 +23,21 @@ class _ServiciosBaniosState extends State<ServiciosBanios> {
   enviar(){
     String banio = _banio.name.toString();
     if(banio == 'sanitario'){
-      banio = 'Descarga Directa';
+      banio = '1 1 Descarga Directa';
     }else if(banio == 'anitario'){
-      banio = 'Sin Descarga Directa';
+      banio = '2 2 Sin Descarga Directa';
     }else if(banio == 'aguaConCubeta'){
-      banio = 'Agua Con Cubeta';
+      banio = '8 8 Agua Con Cubeta';
     }else if(banio == 'letrinaSeca'){
-      banio = 'Letrina Seca';
+      banio = '3 3 Letrina Seca';
     }else if(banio == 'pozo_hoyo') {
-      banio = 'Pozo u Hoyo';
+      banio = '4 4 Pozo u Hoyo';
     } else if(banio == 'noTiene'){
-      banio = 'No tiene';
+      banio = '7 7 No tiene';
     }else if (banio == 'rasSuelo') {
-      banio = 'Ras de Suelo';
+      banio = '5 5 Ras de Suelo';
     } else if(banio == 'otro'){
-      banio = 'Otro';
+      banio = '6 6 Otro';
     }
     print(banio);
   }

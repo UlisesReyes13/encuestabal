@@ -22,21 +22,21 @@ class _ServiciosLuzState extends State<ServiciosLuz> {
   enviar(){
     String luz = _luz.name.toString();
     if (luz == 'servicioPublico') {
-      luz = 'Servicio Público';
+      luz = '1 1 Servicio Público';
     }else if(luz == 'sinContrato'){
-      luz = 'Sin Contrato';
+      luz = '2 2 Sin Contrato';
     }else if(luz == 'plantaParticular'){
-      luz = 'Planta Particular';
+      luz = '3 3 Planta Particular';
     }else if(luz == 'panelSolar'){
-      luz = 'Panel Solar';
+      luz = '4 4 Panel Solar';
     }else if(luz == 'otro'){
-      luz = 'Otro';
+      luz = ' 5 5 Otro';
     }else if(luz == 'sinServicio'){
-      luz = 'Sin Servicio';
+      luz = '6 6 Sin Servicio';
     }else if(luz == 'noTiene'){
-      luz = 'No tiene';
+      luz = '7 7 No tiene';
     }else if(luz == 'conContrato'){
-      luz = 'Con Contrato';
+      luz = '8 8 Con Contrato';
     }
   }
 

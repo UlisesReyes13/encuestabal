@@ -21,27 +21,26 @@ class _ServiciosDrenajeState extends State<ServiciosDrenaje> {
 
   enviar(){
     String drenaje = _drenaje.name.toString();
-
     if(drenaje == 'redPublica'){
-      drenaje = 'Red Pública';
+      drenaje = '1 1 Red Pública';
     }else if(drenaje == 'fosaSeptica'){
-      drenaje = 'Fosa Séptica';
+      drenaje = '2 2 Fosa Séptica';
     }else if(drenaje == 'tuberiaGrieta'){
-      drenaje = 'Tubería que va a dar a una grieta';
+      drenaje = '3 3 Tubería que va a dar a una grieta';
     }else if(drenaje == 'otro'){
-      drenaje = 'Otro';
+      drenaje = '4 4 Otro';
     }else if(drenaje == 'sinServicio'){
-      drenaje = 'Sin Servicio';
+      drenaje = '5 5 Sin Servicio';
     }else if(drenaje == 'noTiene'){
-      drenaje = 'No tiene';
+      drenaje = '6 6 No tiene';
     }else if(drenaje == 'tuberiaRio'){
-      drenaje = 'Tubería que va a dar a un río';
+      drenaje = '7 7 Tubería que va a dar a un río';
     }else if(drenaje == 'rasSuelo'){
-      drenaje = 'Ras de Suelo';
+      drenaje = '8 8 Ras de Suelo';
     }else if(drenaje == 'letrina'){
-      drenaje = 'Letrina';
+      drenaje = '9 9 Letrina';
     }else if(drenaje == 'drenaje'){
-      drenaje = 'Drenaje';
+      drenaje = '10 10 Drenaje';
     }
   }
 

@@ -23,19 +23,19 @@ class _ServiciosCombustibleState extends State<ServiciosCombustible> {
   enviar(){
     String combustible = _combustible.name.toString();
     if(combustible == 'gasTanque'){
-      combustible = 'Gas tanque';
+      combustible = '1 1 Gas tanque';
     }else if(combustible == 'gasNatural'){
-      combustible = 'Gas Natural';
+      combustible = '2  2 Gas Natural';
     }else if(combustible == 'parrillaElectrica'){
-      combustible = 'Parrilla Electrica';
+      combustible = '3 3 Parrilla Electrica';
     }else if(combustible == 'leniaChimenea'){
-      combustible = 'Leña o Carbón con Chimenea';
+      combustible = '4 4 Leña o Carbón con Chimenea';
     }else if(combustible == 'leniaSinChimenea'){
-      combustible = 'Leña o Carbón sin Chimenea';
+      combustible = '5 5 Leña o Carbón sin Chimenea';
     }else if(combustible == 'otroCombustible') {
-      combustible = 'Otro Combustible';
+      combustible = '6 6 Otro Combustible';
     }else if(combustible == 'ninguno'){
-      combustible = 'Ninguno';
+      combustible = '7 7 Ninguno';
     }
   }
 

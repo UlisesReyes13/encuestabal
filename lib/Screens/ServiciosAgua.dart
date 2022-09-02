@@ -23,23 +23,25 @@ class _ServiciosAguaState extends State<ServiciosAgua> {
   enviar(){
     String agua = _agua.name.toString();
     if(agua == 'tomaDomiciliaria'){
-      agua = 'Toma Domiciliaria';
+      agua = '1 1 Toma Domiciliaria';
     }else if(agua == 'tomaComun'){
-      agua  = 'Toma Común o Fuera de Vivienda';
+      agua  = '2 2 Toma Común o Fuera de Vivienda';
     }else if(agua == 'pipa'){
-      agua = 'Pipa';
+      agua = '3 3 Pipa';
     }else if(agua == 'pozo_rio_lago'){
-      agua = 'Pozo, Río, Lago';
+      agua = '4 4 Pozo, Río, Lago';
     }else if(agua == 'llavePublica'){
-      agua = 'Llave Publica';
+      agua = '5 5 Llave Publica';
+    }else if(agua == 'acarreoVivienda'){
+      agua = '6 6 Acarrean de otra vivienda';
     }else if(agua == 'otraFuente'){
-      agua = 'Otra Fuente';
+      agua = '7 7 Otra Fuente';
     }else if(agua == 'ninguna'){
-      agua = 'Ninguna';
+      agua = '8 8 Ninguna';
     }else if(agua == 'noTiene'){
-      agua = 'No tiene';
+      agua = '9 9 No tiene';
     }else if(agua == 'otro'){
-      agua = 'Otro';
+      agua = '10 10 Otro';
     }
   }
 
