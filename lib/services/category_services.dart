@@ -21,4 +21,16 @@ class CategoryService {
   readCtegoriesTipoAsentamiento() async {
     return await _repository.readData('TiposAsentamiento');
   }
+
+  readCategoriesEstadosCiviles() async {
+    return await _repository.readData('tb_EstadosCiviles');
+  }
+
+  readCategoriesParentesco() async {
+    return await _repository.readData('tb_Parentescos');
+  }
+
+  Folio() async {
+    return await _repository.readFolio('datosGenerales');
+  }
 }

@@ -1,4 +1,7 @@
+import 'package:encuestabal/Comm/comHelper.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
+import 'package:encuestabal/DatabaseHandler/DbHelper.dart';
+import 'package:encuestabal/Model/Luz.dart';
 import 'package:encuestabal/Screens/ServiciosAgua.dart';
 import 'package:encuestabal/Screens/ServiciosBanios.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +22,7 @@ class ServiciosLuz extends StatefulWidget {
 class _ServiciosLuzState extends State<ServiciosLuz> {
 
   ServLuz _luz = ServLuz.servicioPublico;
-  enviar(){
+  enviar() async {
     String luz = _luz.name.toString();
     if (luz == 'servicioPublico') {
       luz = '1 1 Servicio Público';
@@ -38,6 +41,97 @@ class _ServiciosLuzState extends State<ServiciosLuz> {
     }else if(luz == 'conContrato'){
       luz = '8 8 Con Contrato';
     }
+
+    var nomLuz = luz; // 'artlang'
+    final NombreLuz = nomLuz
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var luzPk = luz; // 'artlang'
+    final pkLuz = luzPk
+        .replaceAll("A", "")
+        .replaceAll("B", "")
+        .replaceAll("C", "")
+        .replaceAll("D", "")
+        .replaceAll("E", "")
+        .replaceAll("F", "")
+        .replaceAll("G", "")
+        .replaceAll("H", "")
+        .replaceAll("I", "")
+        .replaceAll("J", "")
+        .replaceAll("K", "")
+        .replaceAll("L", "")
+        .replaceAll("M", "")
+        .replaceAll("N", "")
+        .replaceAll("Ñ", "")
+        .replaceAll("O", "")
+        .replaceAll("P", "")
+        .replaceAll("Q", "")
+        .replaceAll("R", "")
+        .replaceAll("S", "")
+        .replaceAll("T", "")
+        .replaceAll("V", "")
+        .replaceAll("W", "")
+        .replaceAll("X", "")
+        .replaceAll("Y", "")
+        .replaceAll("Z", "")
+        .replaceAll("a", "")
+        .replaceAll("b", "")
+        .replaceAll("c", "")
+        .replaceAll("d", "")
+        .replaceAll("e", "")
+        .replaceAll("f", "")
+        .replaceAll("g", "")
+        .replaceAll("h", "")
+        .replaceAll("i", "")
+        .replaceAll("j", "")
+        .replaceAll("k", "")
+        .replaceAll("l", "")
+        .replaceAll("m", "")
+        .replaceAll("n", "")
+        .replaceAll("ñ", "")
+        .replaceAll("o", "")
+        .replaceAll("p", "")
+        .replaceAll("q", "")
+        .replaceAll("r", "")
+        .replaceAll("s", "")
+        .replaceAll("t", "")
+        .replaceAll("u", "")
+        .replaceAll("v", "")
+        .replaceAll("w", "")
+        .replaceAll("x", "")
+        .replaceAll("y", "")
+        .replaceAll("Á", "")
+        .replaceAll("É", "")
+        .replaceAll("Í", "")
+        .replaceAll("Ó", "")
+        .replaceAll("Ú", "")
+        .replaceAll("á", "")
+        .replaceAll("é", "")
+        .replaceAll("í", "")
+        .replaceAll("ó", "")
+        .replaceAll("ú", "")
+        .replaceAll("z", "");
+
+    Luz BModel = Luz(folio: widget.folio,claveServLuz: int.parse(pkLuz.substring(0,2).trimRight()) , ordenServLuz: pkLuz.substring(0,2).trimRight(),servLuz: NombreLuz.trimLeft());
+    await DbHelper().upDateLuz(BModel).then((luz) {
+      alertDialog(context, "Se registro correctamente");
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+        return new ServiciosAgua(widget.folio);
+      }
+      ));
+    }).catchError((error) {
+      print(error);
+      alertDialog(context, "Error: No se guardaron los datos");
+    });
   }
 
   @override
@@ -170,12 +264,7 @@ class _ServiciosLuzState extends State<ServiciosLuz> {
                   margin: EdgeInsets.all(20.0),
                   width: double.infinity,
                   child: FlatButton.icon(
-                    onPressed: (){
-                      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
-                        return new ServiciosAgua(widget.folio);
-                        }
-                      ));
-                    },
+                    onPressed: enviar,
                     icon: Icon(Icons.arrow_forward,color: Colors.white),
                     label: Text('Continuar', style: TextStyle(color: Colors.white),),
                   ),

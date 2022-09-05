@@ -26,7 +26,7 @@ class genLoginSignupHeader extends StatelessWidget {
           ),
           SizedBox(height: 10.0),
           Text(
-            'Encuestas',
+            'ESN',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black38,

@@ -1,7 +1,12 @@
 import 'dart:developer';
 
+import 'package:encuestabal/Model/Agua.dart';
+import 'package:encuestabal/Model/Drenaje.dart';
+import 'package:encuestabal/Model/Gas.dart';
+import 'package:encuestabal/Model/Luz.dart';
 import 'package:encuestabal/Model/NombreAsentamiento.dart';
 import 'package:encuestabal/Model/UserModel.dart';
+import 'package:encuestabal/Model/banio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -14,6 +19,7 @@ class DbHelper {
   static const String DB_Name = 'encuesta.db';
   static const String Table_User = 'usuario';
   static const String Table_Data = 'datosGenerales';
+  static const String Table_Servicios = 'servicios';
   static const int Version = 3;
 
 
@@ -54,6 +60,23 @@ class DbHelper {
   static const String C_OrdenTipoVialidad = 'ordenTipoVialidad';
   static const String C_TipoVialidad = 'tipoVialidad';
 
+  //Tabla Servicios
+  static const String C_pk_bano = 'pk_bano';
+  static const String C_int_orden_bano = 'int_orden_bano';
+  static const String C_txt_desc_bano = 'txt_desc_bano';
+  static const String C_ClaveServAgua = 'claveServAgua';
+  static const String C_OrdenServAgua = 'ordenServAgua';
+  static const String C_ServAgua = 'servAgua';
+  static const String C_ClaveServGas = 'claveServGas';
+  static const String C_OrdenServGas = 'ordenServGas';
+  static const String C_ServGas = 'servGas';
+  static const String C_ClaveServLuz = 'claveServLuz';
+  static const String C_OrdenServLuz = 'ordenServLuz';
+  static const String C_ServLuz = 'servLuz';
+  static const String C_ClaveServSanitario = 'claveServSanitario';
+  static const String C_OrdenServSanitario = 'ordenServSanitario';
+  static const String C_ServSanitario = 'servSanitario';
+
   Future<Database> get db async {
     if (_db != null) {
       return _db;
@@ -72,6 +95,8 @@ class DbHelper {
   _onCreate(Database db, int intVersion) async {
     await db.execute("CREATE TABLE $Table_User ( $C_idUsuario INTEGER not null primary key AUTOINCREMENT , $C_NombreUsuario TEXT, $C_Nombre TEXT, $C_ApellidoP TEXT,$C_ApellidoM TEXT,$C_Rol TEXT,$C_Password TEXT);");
     await db.execute("CREATE TABLE $Table_Data ($C_Folio INTEGER not null Primary key AUTOINCREMENT ,$C_FechaCaptura TEXT, $C_Calle TEXT, $C_EntreCalles TEXT, $C_Grupo TEXT,$C_NoExt TEXT,$C_NoInt TEXT,$C_Fecha TEXT,$C_Localidad TEXT,$C_Telefono TEXT,$C_CP TEXT,$C_ClaveEstado TEXT,$C_Estado TEXT, $C_NombreComunidad TEXT, $C_ClaveMunicipio TEXT,$C_Municipio TEXT,$C_ClaveAsentamiento TEXT,$C_NombreAsentamiento TEXT ,$C_ClaveTipoAsentamiento TEXT, $C_OrdenTipoAsentamiento TEXT, $C_TipoAsentamiento TEXT, $C_ClaveTipoVialidad TEXT, $C_OrdenTipoVialidad TEXT, $C_TipoVialidad TEXT);");
+
+    await db.execute("CREATE TABLE $Table_Servicios ($C_Folio int, $C_pk_bano TEXT , $C_int_orden_bano TEXT, $C_txt_desc_bano TEXT, $C_ClaveServAgua TEXT, $C_OrdenServAgua TEXT, $C_ServAgua TEXT, $C_ClaveServGas TEXT, $C_OrdenServGas TEXT, $C_ServGas TEXT, $C_ClaveServLuz TEXT, $C_OrdenServLuz TEXT, $C_ServLuz TEXT, $C_ClaveServSanitario TEXT, $C_OrdenServSanitario TEXT, $C_ServSanitario TEXT);");
 
     //NOMBRE ASENTAMIENTO
     await db.execute("CREATE TABLE Asentamientos (NombreAsentamientos TEXT);");
@@ -187,15 +212,46 @@ class DbHelper {
     await db.execute("INSERT INTO TiposAsentamiento (TipoAsentamiento) VALUES('41 41 ZONA NAVAL');");
     await db.execute("INSERT INTO TiposAsentamiento (TipoAsentamiento) VALUES('42 42 NINGUNO');");
 
+    //Tabla estados civiles
+    await db.execute("CREATE TABLE tb_EstadosCiviles (EstadoCivil TEXT);");
+    await db.execute("INSERT INTO tb_EstadosCiviles (EstadoCivil) VALUES ('1 1 Soltero(a)');");
+    await db.execute("INSERT INTO tb_EstadosCiviles (EstadoCivil) VALUES ('2 2 Casado(a)');");
+    await db.execute("INSERT INTO tb_EstadosCiviles (EstadoCivil) VALUES ('3 3 Divorciado(a)');");
+    await db.execute("INSERT INTO tb_EstadosCiviles (EstadoCivil) VALUES ('4 4 Viudo(a)');");
+    await db.execute("INSERT INTO tb_EstadosCiviles (EstadoCivil) VALUES ('5 5 Unión libre');");
+    await db.execute("INSERT INTO tb_EstadosCiviles (EstadoCivil) VALUES ('6 6 Madre Soltera');");
+    await db.execute("INSERT INTO tb_EstadosCiviles (EstadoCivil) VALUES ('7 7 Padre Soltero');");
+
+    //Tabla parentescos
+    await db.execute("CREATE TABLE tb_Parentescos (Parentesco TEXT);");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('1 1 Cuñado(a)');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('2 2 Hijo(a)');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('3 3 Nieto(a)');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('4 4 Hermano(a)');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('5 5 Yerno');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('6 6 Titular');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('7 7 Tio(a)');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('8 8 Primo(a)');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('9 9 Bisnieto(a)');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('10 10 Otro');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('11 11 Nuera');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('12 12 Cónyuge');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('13 13 Padre');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('14 14 Sobrino(a)');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('15 15 Madre');");
+    await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('16 16 Suegro(a)');");
+
   }
-
-
 
   readData(table) async {
     var connection = await db;
     return await connection.query(table);
   }
 
+  readFolio(table) async {
+    var connection = await db;
+    return await connection.query(table, where: "folio = (select max(folio) from datosGenerales)");
+  }
 
   Future<int> saveData(UserModel user) async {
     var dbClient = await db;
@@ -203,23 +259,17 @@ class DbHelper {
     return res;
   }
 
-
-
   Future<int> saveDatosGenerales( DatosGeneralesModel datosGenerales)async {
     var dbClient = await db;
     var res = await dbClient.insert(Table_Data, datosGenerales.toMap());
     return res;
   }
 
-
-
   Future<UserModel> getLoginUser(String userId, String password) async {
     var dbClient = await db;
     var res = await dbClient.rawQuery("SELECT * FROM $Table_User WHERE "
         "$C_NombreUsuario= '$userId' AND "
         "$C_Password = '$password'");
-
-
 
     if (res.length > 0) {
       return UserModel.fromMap(res.first);
@@ -228,5 +278,41 @@ class DbHelper {
     return null;
   }
 
+
+  Future<int> saveBanio(Banio banio) async{
+    var dbClient = await db;
+    var res = await dbClient.insert(Table_Servicios, banio.toMap());
+    return res;
+  }
+
+  Future<int> saveBano(Banio banio) async{
+    var dbClient = await db;
+    var res = await dbClient.insert(Table_Servicios, banio.toMap());
+    return res;
+  }
+
+  Future<int> upDateLuz(Luz luz) async{
+    var dbClient = await db;
+    var res = await dbClient.update(Table_Servicios, luz.toMap(),where: "folio = ${luz.folio}");
+    return res;
+  }
+
+  Future<int> upDateAgua(Agua agua) async{
+    var dbClient = await db;
+    var res = await dbClient.update(Table_Servicios, agua.toMap(),where: "folio = ${agua.folio}");
+    return res;
+  }
+
+  Future<int> upDateGas(Gas gas) async{
+    var dbClient = await db;
+    var res = await dbClient.update(Table_Servicios, gas.toMap(),where: "folio = ${gas.folio}");
+    return res;
+  }
+
+  Future<int> upDateDrenaje(Drenaje drenaje) async{
+    var dbClient = await db;
+    var res = await dbClient.update(Table_Servicios, drenaje.toMap(),where: "folio = ${drenaje.folio}");
+    return res;
+  }
 
 }

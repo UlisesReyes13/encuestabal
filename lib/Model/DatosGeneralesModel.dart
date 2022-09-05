@@ -30,7 +30,7 @@ class DatosGeneralesModel {
   String tipoVialidad;
 
 
-  DatosGeneralesModel(
+  DatosGeneralesModel({
       this.folio,
       this.fechaCaptura,
       this.calle,
@@ -58,7 +58,7 @@ class DatosGeneralesModel {
 
       this.claveTipoVialidad,
       this.ordentipovialidad,
-      this.tipoVialidad);
+      this.tipoVialidad});
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{

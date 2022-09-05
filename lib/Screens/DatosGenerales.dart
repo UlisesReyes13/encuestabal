@@ -49,6 +49,7 @@ class _DatosGeneralesState extends State<DatosGenerales> {
   List<Municipios> _Municipios = List<Municipios>();
   List<TiposAsentamiento> _TiposAsentamiento = List<TiposAsentamiento>();
   List<CodigoPostal> _CodigoPostal = List<CodigoPostal>();
+  List<DatosGeneralesModel> _Folio = List<DatosGeneralesModel>();
 
   @override
   void initState() {
@@ -56,6 +57,7 @@ class _DatosGeneralesState extends State<DatosGenerales> {
     getAllCategoriesMunicipios();
     getAllCategoriesTiposAsentamientos();
     getAllCategoriesTipoVialidad();
+    getFolio();
     super.initState();
     dbHelper = DbHelper();
   }
@@ -104,6 +106,21 @@ class _DatosGeneralesState extends State<DatosGenerales> {
         var categoryModel = TiposVialidad();
         categoryModel.TipoVialidad = category['TipoVialidad'];
         _TiposVialidad.add(categoryModel);
+      });
+    });
+  }
+
+  getFolio() async {
+    _Folio = List<DatosGeneralesModel>();
+    var categories = await CategoryService().Folio();
+    categories.forEach((category){
+      setState(() {
+        var categoryModel = DatosGeneralesModel();
+        categoryModel.folio = category['folio'];
+        _Folio.add(categoryModel);
+        var ltFolio = _Folio.map((e) => e.folio + 1);
+        final lastFolio = ltFolio.toString().replaceAll("(","" ).replaceAll(")", "");
+        _folio.text = lastFolio;
       });
     });
   }
@@ -456,30 +473,31 @@ class _DatosGeneralesState extends State<DatosGenerales> {
 
 
     DatosGeneralesModel DModel = DatosGeneralesModel
-      (int.parse(folio),
-        fechaCaptura,
-        calle,
-        entreCalles,
-        grupo,
-        noExt,
-        noInt,
-        fecha,
-        localidad,
-        telefono,
-        int.parse(cp),
-        1,
-        estado,
-        nombreComunidad.trimLeft(),
-        int.parse(ClaveMuni.trimRight()),
-        nomMunicipio.trimLeft(),
-        int.parse(claveAse.trimRight()),
-        nomAsentamiento.trimLeft(),
-        int.parse(claveTipoAsentamien),
-        int.parse(claveTipoAsentamien),
-        tipoAsenta.trimRight(),
-        int.parse(claveTipoViali),
-        int.parse(claveTipoViali),
-        nombreTipoVialidad.trimRight());
+      (folio: int.parse(folio),
+        fechaCaptura: fechaCaptura,
+        calle: calle,
+        entreCalles: entreCalles,
+        grupo: grupo,
+        noExt: noExt,
+        noInt: noInt,
+        fecha: fecha,
+        localidad: localidad,
+        telefono: telefono,
+        claveCodigoPostal: int.parse(cp),
+        claveEstado: 1,
+        estado: estado,
+        nombreComunidad: nombreComunidad.trimLeft(),
+        claveMunicipio: int.parse(ClaveMuni.toString()),
+        municipio: nomMunicipio.trimLeft(),
+        claveAsentamiento: int.parse(claveAse.trimRight()),
+        nombreAsentamiento: nomAsentamiento.trimLeft(),
+        claveTipoAsentamiento: int.parse(claveTipoAsentamien),
+        ordentipoAsentamiento: int.parse(claveTipoViali),
+        tipoAsentamiento: tipoAsenta.trimRight(),
+        claveTipoVialidad: int.parse(claveTipoViali),
+        ordentipovialidad:int.parse(claveTipoViali),
+        tipoVialidad:nombreTipoVialidad.trimRight()
+    );
 
     await dbHelper.saveDatosGenerales(DModel).then((datosGeneralesData) {
       alertDialog(context, "Se registro correctamente");
