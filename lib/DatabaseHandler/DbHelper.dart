@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:encuestabal/Model/Agua.dart';
 import 'package:encuestabal/Model/Drenaje.dart';
+import 'package:encuestabal/Model/EstructuraFamiliarModel.dart';
 import 'package:encuestabal/Model/Gas.dart';
 import 'package:encuestabal/Model/Luz.dart';
 import 'package:encuestabal/Model/NombreAsentamiento.dart';
@@ -20,8 +21,8 @@ class DbHelper {
   static const String Table_User = 'usuario';
   static const String Table_Data = 'datosGenerales';
   static const String Table_Servicios = 'servicios';
+  static const String Table_DatosFamiliares= 'estructuraFailiar';
   static const int Version = 3;
-
 
   static const String C_idUsuario = 'idUsuario';
   static const String C_NombreUsuario = 'nombreUsuario';
@@ -77,6 +78,20 @@ class DbHelper {
   static const String C_OrdenServSanitario = 'ordenServSanitario';
   static const String C_ServSanitario = 'servSanitario';
 
+  //Tabla estructura Familiar
+  static const String C_Nombres = 'nombre';
+  static const String C_PrimerApellido = 'primerApellido';
+  static const String C_SegundoApellido = 'segundoApellido';
+  static const String C_Sexo = 'sexo';
+  static const String C_FechaNacimiento = 'fechaNacimiento';
+  static const String C_EntidadNacimiento = 'entidadNacimiento';
+  static const String C_ClaveEstadoCivil = 'claveEstadoCivil';
+  static const String C_OrdenEstadoCivil = 'ordenEstadoCivil';
+  static const String C_EstadoCivil = 'estadoCivil';
+  static const String C_ClaveParentesco = 'claveParentesco';
+  static const String C_OrdenParentesco = 'OrdenParentesco';
+  static const String C_Parentesco = 'parentesco';
+
   Future<Database> get db async {
     if (_db != null) {
       return _db;
@@ -95,8 +110,9 @@ class DbHelper {
   _onCreate(Database db, int intVersion) async {
     await db.execute("CREATE TABLE $Table_User ( $C_idUsuario INTEGER not null primary key AUTOINCREMENT , $C_NombreUsuario TEXT, $C_Nombre TEXT, $C_ApellidoP TEXT,$C_ApellidoM TEXT,$C_Rol TEXT,$C_Password TEXT);");
     await db.execute("CREATE TABLE $Table_Data ($C_Folio INTEGER not null Primary key AUTOINCREMENT ,$C_FechaCaptura TEXT, $C_Calle TEXT, $C_EntreCalles TEXT, $C_Grupo TEXT,$C_NoExt TEXT,$C_NoInt TEXT,$C_Fecha TEXT,$C_Localidad TEXT,$C_Telefono TEXT,$C_CP TEXT,$C_ClaveEstado TEXT,$C_Estado TEXT, $C_NombreComunidad TEXT, $C_ClaveMunicipio TEXT,$C_Municipio TEXT,$C_ClaveAsentamiento TEXT,$C_NombreAsentamiento TEXT ,$C_ClaveTipoAsentamiento TEXT, $C_OrdenTipoAsentamiento TEXT, $C_TipoAsentamiento TEXT, $C_ClaveTipoVialidad TEXT, $C_OrdenTipoVialidad TEXT, $C_TipoVialidad TEXT);");
-
     await db.execute("CREATE TABLE $Table_Servicios ($C_Folio int, $C_pk_bano TEXT , $C_int_orden_bano TEXT, $C_txt_desc_bano TEXT, $C_ClaveServAgua TEXT, $C_OrdenServAgua TEXT, $C_ServAgua TEXT, $C_ClaveServGas TEXT, $C_OrdenServGas TEXT, $C_ServGas TEXT, $C_ClaveServLuz TEXT, $C_OrdenServLuz TEXT, $C_ServLuz TEXT, $C_ClaveServSanitario TEXT, $C_OrdenServSanitario TEXT, $C_ServSanitario TEXT);");
+    await db.execute("CREATE TABLE $Table_DatosFamiliares ($C_Folio int, $C_Nombres TEXT, $C_PrimerApellido TEXT, $C_SegundoApellido TEXT, $C_Sexo TEXT, $C_FechaNacimiento TEXT, $C_EntidadNacimiento TEXT,$C_ClaveEstadoCivil TEXT ,$C_OrdenEstadoCivil TEXT,$C_EstadoCivil TEXT,$C_ClaveParentesco Text, $C_OrdenParentesco TEXT , $C_Parentesco TEXT);");
+
 
     //NOMBRE ASENTAMIENTO
     await db.execute("CREATE TABLE Asentamientos (NombreAsentamientos TEXT);");
@@ -241,6 +257,94 @@ class DbHelper {
     await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('15 15 Madre');");
     await db.execute("INSERT INTO tb_Parentescos (Parentesco) VALUES ('16 16 Suegro(a)');");
 
+    //Tabla de Escolaridades
+    await db.execute("CREATE TABLE tb_Escolaridades (Escolaridad TEXT);");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('1 1 N/A');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('2 2 Analfabeto');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('3 3 Alfabeto');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('4 4 Preescolar');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('5 5 Primaria');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('6 6 Secundaria');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('7 7 Preparatoria');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('8 8 Carrera técnica con primaria completa');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('9 9 Carrera técnica con secundaria completa');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('10 10 Carrera técnica con preparatoria completa');");
+    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('11 11 Licenciatura');");
+
+    //Tabla Grados escolares
+    await db.execute("CREATE TABLE tb_GradosEscolares (GradoEscolar TEXT);");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('1 0');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('2 1');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('3 2');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('4 3');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('5 4');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('6 5');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('7 6');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('8 7');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('9 8');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('10 9');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('11 10');");
+    await db.execute("INSERT INTO tb_GradosEscolares (GradoEscolar) VALUES ('12 11');");
+
+    //Tabla Derechohabiencia
+    await db.execute("CREATE TABLE tb_Derechohabiencias (Derechohabiencia TEXT);");
+    await db.execute("INSERT INTO tb_Derechohabiencias (Derechohabiencia) VALUES ('1 1 Seguro Popular');");
+    await db.execute("INSERT INTO tb_Derechohabiencias (Derechohabiencia) VALUES ('2 2 IMSS');");
+    await db.execute("INSERT INTO tb_Derechohabiencias (Derechohabiencia) VALUES ('3 3 ISSSTE');");
+    await db.execute("INSERT INTO tb_Derechohabiencias (Derechohabiencia) VALUES ('4 4 Pemex, Defensa o Marina');");
+    await db.execute("INSERT INTO tb_Derechohabiencias (Derechohabiencia) VALUES ('5 5 Clinica u Hospitalidad Privada');");
+    await db.execute("INSERT INTO tb_Derechohabiencias (Derechohabiencia) VALUES ('6 6 A ninguna');");
+    await db.execute("INSERT INTO tb_Derechohabiencias (Derechohabiencia) VALUES ('7 7 Otra');");
+    await db.execute("INSERT INTO tb_Derechohabiencias (Derechohabiencia) VALUES ('8 8 N/A');");
+
+    //Tabla MotivoDerechohabiencia
+    await db.execute("CREATE TABLE tb_MotivoDerechohabiencias (MotivoDerechohabiencia TEXT);");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('1 1 N/A');");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('2 2 Prestación en el trabajo');");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('3 3 Jubilación');");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('4 4 Invalidez');");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('5 5 Algún familiar en el hogar');");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('6 6 Muerte del asegurado');");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('7 7 Ser estudiante');");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('8 8 Contratación propia');");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('9 9 Algún familiar de otro hogar');");
+    await db.execute("INSERT INTO tb_MotivoDerechohabiencias (MotivoDerechohabiencia) VALUES ('10 10 OtroApoyo del gobierno');");
+
+    //Tabla Ocupaciones
+    await db.execute("CREATE TABLE tb_Ocupaciones (Ocupacion TEXT);");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('1 1 N/A');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('2 2 Albañil');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('3 3 Artesano');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('4 4 Ayudante de algún oficio');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('5 5 Ayudante en negocio familiar sin retribución');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('6 6 Ayudante en negocio no familiar sin retribución');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('7 7 Chofer');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('8 8 Ejidatario o Comunero');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('9 9 Empleado del gobierno');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('10 10 Empleado del sector privado');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('11 11 Empleado doméstico');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('12 12 Jornalero agrícola');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('13 13 Miembro de un grupo de productores');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('14 14 Miembro de una cooperativa');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('15 15 Obrero');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('16 16 Patrón de un negocio');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('17 17 Profesionista independiente');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('18 18 Promotor de desarrollo humano');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('19 19 Trabajador por cuenta propia');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('20 20 Vendedor ambulante');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('21 21 Otra ocupación');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('22 22 Desempleado');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('23 23 Pescador');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('24 24 Ama de Casa');");
+    await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('25 25 Estudiante');");
+
+    //Tabla TiposEmpleado
+    await db.execute("CREATE TABLE tb_TipoEmpleod (TipoEmpleo TEXT);");
+    await db.execute("INSERT INTO tb_TipoEmpleos (TipoEmpleo) VALUES ('1 1 N/A');");
+    await db.execute("INSERT INTO tb_TipoEmpleos (TipoEmpleo) VALUES ('2 2 Asalariado');");
+    await db.execute("INSERT INTO tb_TipoEmpleos (TipoEmpleo) VALUES ('3 3 Propio con sueldo asignado / independiente con pago');");
+    await db.execute("INSERT INTO tb_TipoEmpleos (TipoEmpleo) VALUES ('4 4 Propio sin sueldo asignado / independiente sin pago');");
+
   }
 
   readData(table) async {
@@ -312,6 +416,12 @@ class DbHelper {
   Future<int> upDateDrenaje(Drenaje drenaje) async{
     var dbClient = await db;
     var res = await dbClient.update(Table_Servicios, drenaje.toMap(),where: "folio = ${drenaje.folio}");
+    return res;
+  }
+
+  Future<int> saveEstructuraFamiliar(EstructuraFamilarModel estructuraFamilar)async {
+    var dbClient = await db;
+    var res = await dbClient.insert(Table_DatosFamiliares, estructuraFamilar.toMap());
     return res;
   }
 

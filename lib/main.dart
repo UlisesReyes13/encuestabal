@@ -1,4 +1,4 @@
-import 'package:encuestabal/Screens/ServiciosBanios.dart';
+import 'package:encuestabal/Screens/Escolaridad_SeguridadSocial.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/LoginForm.dart';
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginForm(),
+      home: Escolaridad_SeguridadSocial('1'),
     );
   }
 }

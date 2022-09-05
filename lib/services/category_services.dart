@@ -33,4 +33,28 @@ class CategoryService {
   Folio() async {
     return await _repository.readFolio('datosGenerales');
   }
+
+  readCategoriesEcolaridades() async {
+    return await _repository.readData('tb_Escolaridades');
+  }
+
+  readCategoriesDerechohabiencias() async {
+    return await _repository.readData('tb_Derechohabiencias');
+  }
+
+  readCategoriesMotivoDerechohabiencias() async {
+    return await _repository.readData('tb_MotivoDerechohabiencias');
+  }
+  
+  readCategoriesTipoEmpleos() async {
+    return await _repository.readData('tb_TipoEmpleos');
+  }
+
+  readCategoriesOcupaciones() async {
+    return await _repository.readData('tb_Ocupaciones');
+  }
+
+  readCategoriesGradosEscolares() async {
+    return await _repository.readData('tb_GradosEscolares');
+  }
 }

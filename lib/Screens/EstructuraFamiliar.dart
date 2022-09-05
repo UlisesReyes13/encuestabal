@@ -1,8 +1,10 @@
+import 'package:encuestabal/Comm/comHelper.dart';
 import 'package:encuestabal/Comm/genTextField.dart';
 import 'package:encuestabal/Comm/genTextFolio.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
 import 'package:encuestabal/DatabaseHandler/DbHelper.dart';
 import 'package:encuestabal/Model/EstadosCiviles.dart';
+import 'package:encuestabal/Model/EstructuraFamiliarModel.dart';
 import 'package:encuestabal/Screens/Escolaridad_SeguridadSocial.dart';
 import 'package:encuestabal/services/category_services.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +68,113 @@ class _EstructuraFamiliarState extends State<EstructuraFamiliar> {
       });
     });
   }
+
+  insertDatos() async {
+    var EstadoCivil = _estadoCivil.text.toString(); // 'artlang'
+    final estado = EstadoCivil
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+    var Parentesco = _parentesco.text.toString(); // 'artlang'
+    final parentesco = Parentesco
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    EstructuraFamilarModel DModel = EstructuraFamilarModel
+      (folio: int.parse(widget.folio),
+        nombre: _nombre.text.toString(),
+        primerApellido: _primerApellido.text.toString() ,
+        segundoApellido: _segundoApellido.text.toString(),
+        sexo: _sexo.name.toString(),
+        fechaNacimiento: _fechaNacimiento.text.toString(),
+        entidadNacimiento: _entidadNacimiento.text.toString(),
+        claveestadoCivil: _estadoCivil.text.toString().substring(0,1),
+        ordenEstadoCivil: _estadoCivil.text.toString().substring(0,1),
+        estadoCivil: estado.trimLeft(),
+        claveParentesco: _parentesco.text.toString().substring(0,1),
+        ordenParentesco: _parentesco.text.toString().substring(0,1) ,
+        parentesco: parentesco.trimLeft()
+    );
+    await dbHelper.saveEstructuraFamiliar(DModel).then((estructuraFamilar) {
+      alertDialog(context, "Se registro correctamente");
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+        return new Escolaridad_SeguridadSocial(widget.folio);
+      }
+      ));
+    }).catchError((error) {
+      print(error);
+      alertDialog(context, "Error: No se guardaron los datos");
+    });
+  }
+
+  insertDatosNuevos() async {
+    var EstadoCivil = _estadoCivil.text.toString(); // 'artlang'
+    final estado = EstadoCivil
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+    var Parentesco = _parentesco.text.toString(); // 'artlang'
+    final parentesco = Parentesco
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    EstructuraFamilarModel DModel = EstructuraFamilarModel
+      (folio: int.parse(widget.folio),
+        nombre: _nombre.text.toString(),
+        primerApellido: _primerApellido.text.toString() ,
+        segundoApellido: _segundoApellido.text.toString(),
+        sexo: _sexo.name.toString(),
+        fechaNacimiento: _fechaNacimiento.text.toString(),
+        entidadNacimiento: _entidadNacimiento.text.toString(),
+        claveestadoCivil: _estadoCivil.text.toString().substring(0,1),
+        ordenEstadoCivil: _estadoCivil.text.toString().substring(0,1),
+        estadoCivil: estado.trimLeft(),
+        claveParentesco: _parentesco.text.toString().substring(0,1),
+        ordenParentesco: _parentesco.text.toString().substring(0,1) ,
+        parentesco: parentesco.trimLeft()
+    );
+    await dbHelper.saveEstructuraFamiliar(DModel).then((estructuraFamilar) {
+      alertDialog(context, "Se registro correctamente");
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+        return new EstructuraFamiliar(widget.folio);
+      }
+      ));
+    }).catchError((error) {
+      print(error);
+      alertDialog(context, "Error: No se guardaron los datos");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,7 +230,7 @@ class _EstructuraFamiliarState extends State<EstructuraFamiliar> {
                   ),
                 ),
                 ListTile(
-                  title: Text('Hombre'),
+                  title: Text('Mujer'),
                   leading: Radio<Sexo>(
                     value: Sexo.mujer,
                     groupValue: _sexo,
@@ -237,12 +346,7 @@ class _EstructuraFamiliarState extends State<EstructuraFamiliar> {
                     children: [
                       Container(
                         child : FlatButton.icon(
-                            onPressed: (){
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(builder: (_) => EstructuraFamiliar(widget.folio)),
-                                      (Route<dynamic> route) => false);
-                            },
+                            onPressed: insertDatosNuevos;
                             icon: Icon(Icons.add,color: Colors.white,),
                             label: Text('Ingresar otro Integrante', style: TextStyle(color: Colors.white)
                               ,)
@@ -255,12 +359,7 @@ class _EstructuraFamiliarState extends State<EstructuraFamiliar> {
                       SizedBox(width: 30.0),
                       Container(
                         child: FlatButton.icon(
-                            onPressed: (){
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(builder: (_) => Escolaridad_SeguridadSocial()),
-                                      (Route<dynamic> route) => false);
-                            },
+                            onPressed: insertDatos;
                             icon: Icon(Icons.arrow_forward,color: Colors.white,),
                             label: Text('Continuar', style: TextStyle(color: Colors.white)
                               ,)
