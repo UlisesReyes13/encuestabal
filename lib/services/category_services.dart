@@ -57,4 +57,20 @@ class CategoryService {
   readCategoriesGradosEscolares() async {
     return await _repository.readData('tb_GradosEscolares');
   }
+  
+  readCategoriesDiscapacidades() async {
+    return await _repository.readData('tb_CapacidadesDiferentes');
+  }
+  
+  readCategoriesCondicionesSalud() async{
+    return await _repository.readData('tb_CondicionesSalud');
+  }
+  
+  readCategoriesAdicciones() async{
+    return await _repository.readData('tb_Adicciones');
+  }
+  
+  readCategoriesPuebloIndigena() async {
+    return await _repository.readData('tb_EtniasIndigenas');
+  }
 }

@@ -7,12 +7,13 @@ import 'package:encuestabal/Model/MotivoDerechoHabiencia.dart';
 import 'package:encuestabal/Model/OcupacionesModel.dart';
 import 'package:encuestabal/Model/TipoEmpleoModel.dart';
 import 'package:encuestabal/Screens/EstructuraFamiliar.dart';
+import 'package:encuestabal/Screens/Salud_PerteneciaIndigena.dart';
 import 'package:encuestabal/services/category_services.dart';
 import 'package:flutter/material.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
 import 'package:searchfield/searchfield.dart';
 
-enum AsisteEscuela{si, no}
+enum AsisteEscuela{si, no, na}
 enum JubilacionPensionado {na, si, no}
 
 class Escolaridad_SeguridadSocial extends StatefulWidget {
@@ -98,7 +99,7 @@ class _Escolaridad_SeguridadSocialState extends State<Escolaridad_SeguridadSocia
     categories.forEach((category){
       setState(() {
         var categoryModel = TipoEmpleoModel();
-        categoryModel.tipoEmpleo = category['TipoEmpleo'];
+        categoryModel.TipoEmpleo = category['TipoEmpleo'];
         _TipoEmpleo.add(categoryModel);
       });
     });
@@ -241,6 +242,18 @@ class _Escolaridad_SeguridadSocialState extends State<Escolaridad_SeguridadSocia
                           },
                         ),
                       ),
+                      ListTile(
+                        title: Text('N/A'),
+                        leading: Radio<AsisteEscuela>(
+                          value: AsisteEscuela.na,
+                          groupValue: _asisteEscuela,
+                          onChanged: (AsisteEscuela value){
+                            setState(() {
+                              _asisteEscuela = value;
+                            });
+                            },
+                        ),
+                      ),
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Ocupación'),
                 SizedBox(height: 5.0),
@@ -292,7 +305,7 @@ class _Escolaridad_SeguridadSocialState extends State<Escolaridad_SeguridadSocia
                       fillColor: Colors.grey[120],
                     ),
                     suggestions: _TipoEmpleo.map((tipoEmpleo) =>
-                        SearchFieldListItem(tipoEmpleo.tipoEmpleo, item: tipoEmpleo)).toList(),
+                        SearchFieldListItem(tipoEmpleo.TipoEmpleo, item: tipoEmpleo)).toList(),
                     textInputAction: TextInputAction.next,
                     hasOverlay: false,
                     controller: _tipoEmpleo,
@@ -408,7 +421,7 @@ class _Escolaridad_SeguridadSocialState extends State<Escolaridad_SeguridadSocia
                       onPressed: (){
                         Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(builder: (_) => Escolaridad_SeguridadSocial(widget.folio)),
+                            MaterialPageRoute(builder: (_) => Salud_PertenenciaIndigena(widget.folio)),
                                 (Route<dynamic> route) => false);
                       },
                       icon: Icon(Icons.arrow_forward,color: Colors.white,),

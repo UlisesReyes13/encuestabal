@@ -1,14 +1,14 @@
 class TipoEmpleoModel {
-  String tipoEmpleo;
+  String TipoEmpleo;
 
-  TipoEmpleoModel({this.tipoEmpleo});
+  TipoEmpleoModel({this.TipoEmpleo});
 
   Map<String, dynamic> toMap() {
     return {
-      'grado': tipoEmpleo
+      'TipoEmpleo': TipoEmpleo
     };
   }
   TipoEmpleoModel.fromMap(Map<String, dynamic> map) {
-    tipoEmpleo = map['ocupacion'];
+    TipoEmpleo = map['TipoEmpleo'];
   }
 }

@@ -259,17 +259,17 @@ class DbHelper {
 
     //Tabla de Escolaridades
     await db.execute("CREATE TABLE tb_Escolaridades (Escolaridad TEXT);");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('1 1 N/A');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('2 2 Analfabeto');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('3 3 Alfabeto');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('4 4 Preescolar');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('5 5 Primaria');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('6 6 Secundaria');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('7 7 Preparatoria');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('8 8 Carrera técnica con primaria completa');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('9 9 Carrera técnica con secundaria completa');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('10 10 Carrera técnica con preparatoria completa');");
-    await db.execute("INTO tb_Escolaridades (Escolaridad) VALUES ('11 11 Licenciatura');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('1 1 N/A');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('2 2 Analfabeto');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('3 3 Alfabeto');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('4 4 Preescolar');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('5 5 Primaria');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('6 6 Secundaria');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('7 7 Preparatoria');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('8 8 Carrera técnica con primaria completa');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('9 9 Carrera técnica con secundaria completa');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('10 10 Carrera técnica con preparatoria completa');");
+    await db.execute("INSERT INTO tb_Escolaridades (Escolaridad) VALUES ('11 11 Licenciatura');");
 
     //Tabla Grados escolares
     await db.execute("CREATE TABLE tb_GradosEscolares (GradoEscolar TEXT);");
@@ -339,11 +339,119 @@ class DbHelper {
     await db.execute("INSERT INTO tb_Ocupaciones (Ocupacion) VALUES ('25 25 Estudiante');");
 
     //Tabla TiposEmpleado
-    await db.execute("CREATE TABLE tb_TipoEmpleod (TipoEmpleo TEXT);");
+    await db.execute("CREATE TABLE tb_TipoEmpleos (TipoEmpleo TEXT);");
     await db.execute("INSERT INTO tb_TipoEmpleos (TipoEmpleo) VALUES ('1 1 N/A');");
     await db.execute("INSERT INTO tb_TipoEmpleos (TipoEmpleo) VALUES ('2 2 Asalariado');");
     await db.execute("INSERT INTO tb_TipoEmpleos (TipoEmpleo) VALUES ('3 3 Propio con sueldo asignado / independiente con pago');");
     await db.execute("INSERT INTO tb_TipoEmpleos (TipoEmpleo) VALUES ('4 4 Propio sin sueldo asignado / independiente sin pago');");
+
+    //Tabla de Discpacidades
+    await db.execute("CREATE TABLE tb_CapacidadesDiferentes (CapacidadDiferente TEXT);");
+    await db.execute("INSERT INTO tb_CapacidadesDiferentes (CapacidadDiferente) VALUES ('1 0 N/A');");
+    await db.execute("INSERT INTO tb_CapacidadesDiferentes (CapacidadDiferente) VALUES ('2 1 Sensoriales y de Comunicación');");
+    await db.execute("INSERT INTO tb_CapacidadesDiferentes (CapacidadDiferente) VALUES ('3 2 Motrices');");
+    await db.execute("INSERT INTO tb_CapacidadesDiferentes (CapacidadDiferente) VALUES ('4 3 Aprendizaje y comportamiento');");
+    await db.execute("INSERT INTO tb_CapacidadesDiferentes (CapacidadDiferente) VALUES ('5 4 Más de 1 discapacidad');");
+
+    //Tabla de Condiciones de salud
+    await db.execute("CREATE TABLE tb_CondicionesSalud (CondicionesSalud TEXT);");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('1 0 N/A');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('2 1 Infecciosas (Hepatitis, ETS, Virus)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('3 2 Tumores (malignos y no malignos)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('4 3 De la sangre (anemias)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('5 4 Diabetes, tiroides, obesidad');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('6 5 Desórdenes mentales (esquizofrenia)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('7 6 Sistema nervioso (neuropatías)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('8 7 Enfermedades de los sentidos');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('9 8 Sistema circulatorio (hipertensión)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('10 9 Sistema respiratorio (neumonía)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('11 10 Aparato digestivo (Colitis, hernias)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('12 11 De la piel (Dermatitis)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('13 12 Genitourinario (insuficiencia renal)');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('14 13 Malformaciones');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('15 14 Sintomas no clasificados');");
+    await db.execute("INSERT INTO tb_CondicionesSalud (CondicionesSalud) VALUES ('16 15 Lesiones, heridas, intoxicaciones');");
+
+    //Tabla de Adicciones
+    await db.execute("CREATE TABLE tb_Adicciones (Adiccion TEXT);");
+    await db.execute("INSERT INTO tb_Adicciones (Adiccion) VALUES ('1 0 N/A');");
+    await db.execute("INSERT INTO tb_Adicciones (Adiccion) VALUES ('2 1 Tabaquismo');");
+    await db.execute("INSERT INTO tb_Adicciones (Adiccion) VALUES ('3 2 Alcoholismo');");
+    await db.execute("INSERT INTO tb_Adicciones (Adiccion) VALUES ('4 3 Drogadicción');");
+    await db.execute("INSERT INTO tb_Adicciones (Adiccion) VALUES ('5 4 Otra');");
+
+    //Tabla de Pueblo Indigena
+    await db.execute("CREATE TABLE tb_EtniasIndigenas (EtniaIndigena TEXT);");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('1 0 N/A');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('2 1 Aketeko');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('3 2 Amuzgo');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('4 3 Awaketeko');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('5 4 Apayapaneco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('6 5 Cora');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('7 6 Cucapá');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('8 7 Cuicateco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('9 8 Chatino');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('10 9 Chichimeco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('11 10 Chinanteco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('12 11 Chochotelco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('13 12 Chontal Oaxaca');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('14 13 Chontal Tabasco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('15 14 Chuj');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('16 15 Ch''ol');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('17 16 Guarijìo');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('18 17 Huasteco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('19 18 Huave');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('20 19 Huichol');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('21 20 Ixcateco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('22 21 Ixil');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('23 22 Jakalteco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('24 23 Kaqchikel');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('25 24 Kickapoo');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('26 25 Killiwa');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('27 26 Kumial');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('28 27 Ku''ahl');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('29 28 k''iche''');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('30 29 Lacandón');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('31 30 Mam');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('32 31 Matlatzinaca');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('33 32 Maya');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('34 33 Mayo');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('35 34 Mazahua');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('36 35 Mazateco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('37 36 Mixe');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('38 37 Mixteco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('39 38 Náhuatl');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('40 39 Oluteco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('41 40 Otomí');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('42 41 Paipal');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('43 42 Pame');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('44 43 Pápago');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('45 44 Pima');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('46 45 Popoloca');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('47 46 Popoluca');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('48 47 Qato''k');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('49 48 Qánjobál');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('50 49 Qéchi''');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('51 50 Sayulteco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('52 51 Seri');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('53 52 Tarahumara');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('54 53 Tarasco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('55 54 Teko');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('56 55 Tepehua');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('57 56 Tepehuano Norte');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('58 57 Tepehuano Sur');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('59 58 Texistepequeño');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('60 59 Tojolabal');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('61 60 Totonaco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('62 61 Triqui');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('63 62 Tlahuica');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('64 63 Tlapaneco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('65 64 Tseltal');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('66 65 Tsotsil');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('67 66 Yaqui');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('68 67 Zapoteco');");
+    await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('69 68 Zoque');");
+
 
   }
 

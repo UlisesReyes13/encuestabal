@@ -346,7 +346,7 @@ class _EstructuraFamiliarState extends State<EstructuraFamiliar> {
                     children: [
                       Container(
                         child : FlatButton.icon(
-                            onPressed: insertDatosNuevos;
+                            onPressed: insertDatosNuevos,
                             icon: Icon(Icons.add,color: Colors.white,),
                             label: Text('Ingresar otro Integrante', style: TextStyle(color: Colors.white)
                               ,)
@@ -359,7 +359,7 @@ class _EstructuraFamiliarState extends State<EstructuraFamiliar> {
                       SizedBox(width: 30.0),
                       Container(
                         child: FlatButton.icon(
-                            onPressed: insertDatos;
+                            onPressed: insertDatos,
                             icon: Icon(Icons.arrow_forward,color: Colors.white,),
                             label: Text('Continuar', style: TextStyle(color: Colors.white)
                               ,)
