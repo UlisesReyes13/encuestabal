@@ -1,7 +1,9 @@
 class PrestacionesLaboralesModel{
   String prestacion;
-  bool selected = false;
+  bool value;
 
-  PrestacionesLaboralesModel(this.prestacion, this.selected);
+  PrestacionesLaboralesModel({this.prestacion, this.value = false});
 
+  @override
+  String toString() => prestacion;
 }

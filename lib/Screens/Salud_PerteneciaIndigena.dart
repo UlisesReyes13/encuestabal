@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:encuestabal/Comm/comHelper.dart';
 import 'package:encuestabal/Comm/genTextField.dart';
 import 'package:encuestabal/Comm/genTextFolio.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
@@ -8,6 +9,7 @@ import 'package:encuestabal/Model/AdiccionesModel.dart';
 import 'package:encuestabal/Model/CondicionesSaludModel.dart';
 import 'package:encuestabal/Model/DiscapacidadesModel.dart';
 import 'package:encuestabal/Model/PuebloIndigenaModel.dart';
+import 'package:encuestabal/Model/SaludPerteneciaIndigenaModel.dart';
 import 'package:encuestabal/Screens/Escolaridad_SeguridadSocial.dart';
 import 'package:encuestabal/services/category_services.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +32,9 @@ class _Salud_PertenenciaIndigenaState extends State<Salud_PertenenciaIndigena> {
   final _peso = TextEditingController();
   final _talla = TextEditingController();
   final _puebloIndigena = TextEditingController();
+  static double imC;
 
-  String imc;
-  final _imc = TextEditingController.fromValue(TextEditingValue(text: '9'));
   var dbHelper;
-
 
   List<CapacidadesDiferentes> _Discapacidades = List<CapacidadesDiferentes>();
   List<CondicioneSaludModel> _Condiciones = List<CondicioneSaludModel>();
@@ -49,6 +49,21 @@ class _Salud_PertenenciaIndigenaState extends State<Salud_PertenenciaIndigena> {
   getAllCategoriesPuebloIndigena();
 
   dbHelper = DbHelper();
+  }
+
+  IMC() {
+    String peso = _peso.text;
+    String talla = _talla.text;
+    if(peso == "" && talla == ""){
+      peso = "0";
+      talla = "0";
+    }
+    double tallaM = double.parse(talla)/100;
+    double indice = double.parse(peso) / pow(tallaM, 2);
+    String i = indice.toString();
+    final _imc = TextEditingController.fromValue(TextEditingValue(text: i));
+    imC = double.parse(i);
+    return _imc;
   }
 
   getAllCategoriesDiscapacidades() async {
@@ -97,6 +112,100 @@ class _Salud_PertenenciaIndigenaState extends State<Salud_PertenenciaIndigena> {
         _PueblosIndigenas.add(categoryModel);
       });
     });
+  }
+
+  insertarDatos() async {
+
+    String discapacidad = _discapacidad.text;
+    String condicionesSalud = _condicionesSalud.text;
+    String adiccion = _adiccion.text;
+    String peso = _peso.text;
+    String talla = _talla.text;
+    String puebloIndigena = _puebloIndigena.text;
+
+    var Discapacidad1 = discapacidad; // 'artlang'
+    final discapacida = Discapacidad1
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var CondicionesSalud1 = condicionesSalud; // 'artlang'
+    final condicionesSalu = CondicionesSalud1
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var Adiccion1 = adiccion; // 'artlang'
+    final adiccio = Adiccion1
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var PuebloIndigena1 = puebloIndigena; // 'artlang'
+    final puebloIndigena1 = PuebloIndigena1
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    SaludPerteneciaIndigenaModel DModel = SaludPerteneciaIndigenaModel(
+      folio: int.parse(widget.folio),
+      ClaveCapacidadDiferente: discapacidad.substring(0,1),
+      OrdenCapacidadDiferente: discapacidad.substring(2,3),
+      CapacidadDiferente: discapacida.trimLeft(),
+      ClaveCondicionesSalud: condicionesSalud.substring(0,1),
+      OrdenCondicionesSalud: condicionesSalud.substring(2,3),
+      CondicionesSalud: condicionesSalu.trimLeft(),
+      ClaveAdiccion: adiccion.substring(0,1),
+      OrdenAdiccion: adiccion.substring(2,3),
+      Adiccion: adiccio.trimLeft(),
+      peso: int.parse(peso),
+      talla: int.parse(talla),
+      imc: imC,
+      ClaveEtniaIndigena: puebloIndigena.substring(0,1),
+      OrdenEtniaIndigena: puebloIndigena.substring(2,3),
+      EtniaIndigena: puebloIndigena1.trimLeft(),
+    );
+
+    await dbHelper.saveSaludIndigena(DModel).then((saludPerteneciaIndigenaModel) {
+      alertDialog(context, "Se registro correctamente");
+
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+        return new Salud_PertenenciaIndigena(widget.folio);
+      }
+      ));
+    }).catchError((error) {
+      print(error);
+      alertDialog(context, "Error: No se guardaron los datos");
+    });
+
   }
 
   @override
@@ -229,7 +338,13 @@ class _Salud_PertenenciaIndigenaState extends State<Salud_PertenenciaIndigena> {
                 getTextField(controller: _talla),
                 SizedBox(height: 5.0),
                 getTextQuestion(question: 'IMC'),
-                getTextFolio(controller: _imc),
+                TextField(controller: IMC(),
+                  onTap: () async{
+                    setState(() {
+                      IMC();
+                    });;
+                  }
+                  ,),
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Pueblo Indigena'),
                 //Menu desplegable pueblo indigena
@@ -264,8 +379,7 @@ class _Salud_PertenenciaIndigenaState extends State<Salud_PertenenciaIndigena> {
                   margin: EdgeInsets.all(20.0),
                   width: double.infinity,
                   child: FlatButton.icon(
-                      onPressed: (){
-                      },
+                      onPressed: insertarDatos,
                       icon: Icon(Icons.arrow_forward,color: Colors.white,),
                       label: Text('Continuar', style: TextStyle(color: Colors.white)
                         ,)

@@ -1,10 +1,13 @@
+import 'package:encuestabal/Comm/comHelper.dart';
 import 'package:encuestabal/Comm/genTextFolio.dart';
 import 'package:encuestabal/DatabaseHandler/DbHelper.dart';
 import 'package:encuestabal/Model/DerechohabienciasModel.dart';
+import 'package:encuestabal/Model/EscolaridadSeguridadSocial.dart';
 import 'package:encuestabal/Model/EscolaridadesModel.dart';
 import 'package:encuestabal/Model/GradosEscolaresModel.dart';
 import 'package:encuestabal/Model/MotivoDerechoHabiencia.dart';
 import 'package:encuestabal/Model/OcupacionesModel.dart';
+import 'package:encuestabal/Model/PrestacionesLaboralesModel.dart';
 import 'package:encuestabal/Model/TipoEmpleoModel.dart';
 import 'package:encuestabal/Screens/EstructuraFamiliar.dart';
 import 'package:encuestabal/Screens/Salud_PerteneciaIndigena.dart';
@@ -12,6 +15,7 @@ import 'package:encuestabal/services/category_services.dart';
 import 'package:flutter/material.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
 import 'package:searchfield/searchfield.dart';
+import 'package:get/get.dart';
 
 enum AsisteEscuela{si, no, na}
 enum JubilacionPensionado {na, si, no}
@@ -43,6 +47,20 @@ class _Escolaridad_SeguridadSocialState extends State<Escolaridad_SeguridadSocia
   List<TipoEmpleoModel> _TipoEmpleo = List<TipoEmpleoModel>();
   List<DerechoHabienciasModel> _Derechohabiencia = List<DerechoHabienciasModel>();
   List<MotivoDerechoHabienciasModel> _MotivioDerechohabiencia = List<MotivoDerechoHabienciasModel>();
+
+  final dataList = <PrestacionesLaboralesModel>[
+    PrestacionesLaboralesModel(prestacion: '1 A incapacidad por enfermedad, accidente o maternidad'),
+    PrestacionesLaboralesModel(prestacion: '2 B sar o afore'),
+    PrestacionesLaboralesModel(prestacion: '3 C crédito para vivienda'),
+    PrestacionesLaboralesModel(prestacion: '4 D guardería'),
+    PrestacionesLaboralesModel(prestacion: '5 E aguinaldo'),
+    PrestacionesLaboralesModel(prestacion: '6 F seguro de vida'),
+    PrestacionesLaboralesModel(prestacion: '7 G no tiene derecho a ninguna prestación'),
+    PrestacionesLaboralesModel(prestacion: '8 H otro tipo de seguro contratado'),
+    PrestacionesLaboralesModel(prestacion: '9 I n/a')
+  ].obs;
+
+  final selectedItems = <PrestacionesLaboralesModel>[].obs;
 
   @override
   void initState(){
@@ -128,6 +146,332 @@ class _Escolaridad_SeguridadSocialState extends State<Escolaridad_SeguridadSocia
       });
     });
   }
+
+  insertDatos() async {
+
+    String asisteEsuela = _asisteEscuela.name.toString();
+    if(asisteEsuela == 'na'){
+      asisteEsuela = '1 1 N/A';
+    }else if(asisteEsuela == 'si'){
+      asisteEsuela  = '2 2 Si';
+    }else if(asisteEsuela == 'no'){
+      asisteEsuela = '3 3 No';
+    }
+
+    String Jubilado = _jubilacionPensionado.name.toString();
+    if(Jubilado == 'na'){
+      Jubilado = '1 1 N/A';
+    }else if(Jubilado == 'si'){
+      Jubilado  = '2 2 Si';
+    }else if(Jubilado == 'no'){
+      Jubilado = '3 3 No';
+    }
+
+    var AsisteE = asisteEsuela; // 'artlang'
+    final asisteE = AsisteE
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var Jubilacion = Jubilado; // 'artlang'
+    final jubilacion = Jubilacion
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var Escolaridad = _escolaridad.text.toString(); // 'artlang'
+    final escolaridad = Escolaridad
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var Ocupacion = _ocupacion.text.toString(); // 'artlang'
+    final ocupacion = Ocupacion
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var TipoEmpleo = _tipoEmpleo.text.toString(); // 'artlang'
+    final tipoEmpleo = TipoEmpleo
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var Derecho = _derechohabiencia.text.toString(); // 'artlang'
+    final derecho = Derecho
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var MotivoDerecho = _motivoderechohabiencia.text.toString(); // 'artlang'
+    final motivoDerecho = MotivoDerecho
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    selectedItems.clear();
+    selectedItems.addAll((dataList.where((p0) => p0.value)));
+    print(selectedItems.toString());
+
+    var pkPrestaciones = selectedItems.toString(); // 'artlang'
+    final prestacionesPK = pkPrestaciones
+        .replaceAll("[", "")
+        .replaceAll("]", "")
+        .replaceAll("A", "")
+        .replaceAll("B", "")
+        .replaceAll("C", "")
+        .replaceAll("D", "")
+        .replaceAll("E", "")
+        .replaceAll("F", "")
+        .replaceAll("G", "")
+        .replaceAll("H", "")
+        .replaceAll("I", "")
+        .replaceAll("J", "")
+        .replaceAll("K", "")
+        .replaceAll("L", "")
+        .replaceAll("M", "")
+        .replaceAll("N", "")
+        .replaceAll("Ñ", "")
+        .replaceAll("O", "")
+        .replaceAll("P", "")
+        .replaceAll("Q", "")
+        .replaceAll("R", "")
+        .replaceAll("S", "")
+        .replaceAll("T", "")
+        .replaceAll("V", "")
+        .replaceAll("W", "")
+        .replaceAll("X", "")
+        .replaceAll("Y", "")
+        .replaceAll("Z", "")
+        .replaceAll("a", "")
+        .replaceAll("b", "")
+        .replaceAll("c", "")
+        .replaceAll("d", "")
+        .replaceAll("e", "")
+        .replaceAll("f", "")
+        .replaceAll("g", "")
+        .replaceAll("h", "")
+        .replaceAll("i", "")
+        .replaceAll("j", "")
+        .replaceAll("k", "")
+        .replaceAll("l", "")
+        .replaceAll("m", "")
+        .replaceAll("n", "")
+        .replaceAll("ñ", "")
+        .replaceAll("o", "")
+        .replaceAll("p", "")
+        .replaceAll("q", "")
+        .replaceAll("r", "")
+        .replaceAll("s", "")
+        .replaceAll("t", "")
+        .replaceAll("u", "")
+        .replaceAll("v", "")
+        .replaceAll("w", "")
+        .replaceAll("x", "")
+        .replaceAll("y", "")
+        .replaceAll("Á", "")
+        .replaceAll("É", "")
+        .replaceAll("Í", "")
+        .replaceAll("Ó", "")
+        .replaceAll("Ú", "")
+        .replaceAll("á", "")
+        .replaceAll("é", "")
+        .replaceAll("í", "")
+        .replaceAll("ó", "")
+        .replaceAll("ú", "")
+        .replaceAll("z", "");
+
+    var intPrestaciones = selectedItems.toString(); // 'artlang'
+    final prestacionesInt = intPrestaciones
+        .replaceAll("[", "")
+        .replaceAll("]", "")
+        .replaceAll("a", "")
+        .replaceAll("b", "")
+        .replaceAll("c", "")
+        .replaceAll("d", "")
+        .replaceAll("e", "")
+        .replaceAll("f", "")
+        .replaceAll("g", "")
+        .replaceAll("h", "")
+        .replaceAll("i", "")
+        .replaceAll("j", "")
+        .replaceAll("k", "")
+        .replaceAll("l", "")
+        .replaceAll("m", "")
+        .replaceAll("n", "")
+        .replaceAll("ñ", "")
+        .replaceAll("o", "")
+        .replaceAll("p", "")
+        .replaceAll("q", "")
+        .replaceAll("r", "")
+        .replaceAll("s", "")
+        .replaceAll("t", "")
+        .replaceAll("u", "")
+        .replaceAll("v", "")
+        .replaceAll("w", "")
+        .replaceAll("x", "")
+        .replaceAll("y", "")
+        .replaceAll("Á", "")
+        .replaceAll("É", "")
+        .replaceAll("Í", "")
+        .replaceAll("Ó", "")
+        .replaceAll("Ú", "")
+        .replaceAll("á", "")
+        .replaceAll("é", "")
+        .replaceAll("í", "")
+        .replaceAll("ó", "")
+        .replaceAll("ú", "")
+        .replaceAll("z", "")
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var Prestaciones = selectedItems.toString(); // 'artlang'
+    final prestaciones = Prestaciones
+        .replaceAll("[", "")
+        .replaceAll("]", "")
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "")
+        .replaceAll("A", "")
+        .replaceAll("B", "")
+        .replaceAll("C", "")
+        .replaceAll("D", "")
+        .replaceAll("E", "")
+        .replaceAll("F", "")
+        .replaceAll("G", "")
+        .replaceAll("H", "")
+        .replaceAll("I", "")
+        .replaceAll("J", "")
+        .replaceAll("K", "")
+        .replaceAll("L", "")
+        .replaceAll("M", "")
+        .replaceAll("N", "")
+        .replaceAll("Ñ", "")
+        .replaceAll("O", "")
+        .replaceAll("P", "")
+        .replaceAll("Q", "")
+        .replaceAll("R", "")
+        .replaceAll("S", "")
+        .replaceAll("T", "")
+        .replaceAll("V", "")
+        .replaceAll("W", "")
+        .replaceAll("X", "")
+        .replaceAll("Y", "")
+        .replaceAll("Z", "");
+
+
+
+    EscolaridadSeguridadSocial DModel = EscolaridadSeguridadSocial
+      (folio: int.parse(widget.folio),
+        ClaveEscolaridad: _gradoEscolar.text.toString().substring(0,1),
+        OrdenEscolaridad: _gradoEscolar.text.toString().substring(0,1),
+        Escolaridad: escolaridad.trimLeft(),
+        ClaveGradoEscolar: _gradoEscolar.text.toString().substring(0,1),
+        GradoEscolar: _gradoEscolar.text.toString().substring(2,3),
+        ClaveAsisteEscuela: AsisteE.substring(0,1),
+        OrdenAsisteEscuela: AsisteE.substring(0,1),
+        AsisteEscuela: asisteE.trimLeft(),
+        ClaveOcupacion: _ocupacion.text.toString().substring(0,1),
+        OrdenOcupacion: _ocupacion.text.toString().substring(0,1),
+        Ocupacion: ocupacion.trimLeft(),
+        ClaveTipoEmpleo: _tipoEmpleo.text.toString().substring(0,1) ,
+        OrdenTipoEmpleo: _tipoEmpleo.text.toString().substring(0,1) ,
+        TipoEmpleo: tipoEmpleo.trimLeft(),
+
+        pk_prestacioneslab: prestacionesPK.trimRight(),
+        int_OrdenPrestacionesLab: prestacionesInt.trimRight().trimLeft(),
+        txt_desc_prestacioneslab: prestaciones.trimLeft(),
+
+        ClaveJubilacion: Jubilacion.substring(0,1),
+        OrdenJubilacion: Jubilacion.substring(0,1),
+        Jubilacion: jubilacion.trimLeft(),
+
+        ClaveDerechohabiencia: _derechohabiencia.text.toString().substring(0,1),
+        OrdenDerechohabiencia: _derechohabiencia.text.toString().substring(0,1),
+        Derechohabiencia: derecho.trimLeft(),
+        ClaveMotivoDerechohabiencia: _motivoderechohabiencia.text.toString().substring(0,1),
+        OrdenMotivoDerechohabiencia: _motivoderechohabiencia.text.toString().substring(0,1),
+        MotivoDerechohabiencia: motivoDerecho.trimLeft()
+    );
+
+    await dbHelper.saveEscolaridadSocial(DModel).then((escolaridadSeguridadSocial) {
+      alertDialog(context, "Se registro correctamente");
+
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+        return new Salud_PertenenciaIndigena(widget.folio);
+      }
+
+      ));
+    }).catchError((error) {
+      print(error);
+      alertDialog(context, "Error: No se guardaron los datos");
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -316,7 +660,7 @@ class _Escolaridad_SeguridadSocialState extends State<Escolaridad_SeguridadSocia
                 ),
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Prestaciones Laborales'),
-
+                Obx(() => Column(children: genarateItems())),
                 SizedBox(height: 5.0),
                 getTextQuestion(question: 'Jubilación o Pensionado'),
                 ListTile(
@@ -418,12 +762,7 @@ class _Escolaridad_SeguridadSocialState extends State<Escolaridad_SeguridadSocia
                   margin: EdgeInsets.all(20.0),
                   width: double.infinity,
                   child: FlatButton.icon(
-                      onPressed: (){
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (_) => Salud_PertenenciaIndigena(widget.folio)),
-                                (Route<dynamic> route) => false);
-                      },
+                      onPressed: insertDatos,
                       icon: Icon(Icons.arrow_forward,color: Colors.white,),
                       label: Text('Continuar', style: TextStyle(color: Colors.white)
                         ,)
@@ -439,5 +778,28 @@ class _Escolaridad_SeguridadSocialState extends State<Escolaridad_SeguridadSocia
         ),
       ),
     );
+  }
+
+  /*Widget buildSingleCheckBox(PrestacionesLaboralesModel checkbox) =>
+      CheckboxListTile(
+        controlAffinity: ListTileControlAffinity.leading,
+        title: Text(checkbox.prestacion),
+        value: checkbox.value,
+        onChanged: (value) => setState(() => checkbox.value = value),
+  );*/
+
+  List <Widget> genarateItems(){
+    final result = <Widget>[];
+    for(int i = 0; i < dataList.length; i++){
+      result.add(CheckboxListTile(
+          controlAffinity: ListTileControlAffinity.leading,
+          value: dataList[i].value,
+          title: Text(dataList[i].prestacion),
+          onChanged: (v){
+            dataList[i].value = v ?? false;
+            dataList.refresh();
+          }));
+    }
+    return  result;
   }
 }

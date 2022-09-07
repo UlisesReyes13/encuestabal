@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:encuestabal/Model/Agua.dart';
 import 'package:encuestabal/Model/Drenaje.dart';
+import 'package:encuestabal/Model/EscolaridadSeguridadSocial.dart';
 import 'package:encuestabal/Model/EstructuraFamiliarModel.dart';
 import 'package:encuestabal/Model/Gas.dart';
 import 'package:encuestabal/Model/Luz.dart';
 import 'package:encuestabal/Model/NombreAsentamiento.dart';
+import 'package:encuestabal/Model/SaludPerteneciaIndigenaModel.dart';
 import 'package:encuestabal/Model/UserModel.dart';
 import 'package:encuestabal/Model/banio.dart';
 import 'package:path_provider/path_provider.dart';
@@ -21,7 +23,9 @@ class DbHelper {
   static const String Table_User = 'usuario';
   static const String Table_Data = 'datosGenerales';
   static const String Table_Servicios = 'servicios';
-  static const String Table_DatosFamiliares= 'estructuraFailiar';
+  static const String Table_DatosFamiliares= 'estructuraFamiliar';
+  static const String Table_Escolaridad= 'escolaridadSeguridadSocial';
+  static const String Table_Salud= 'saludPertenenciaIndigena';
   static const int Version = 3;
 
   static const String C_idUsuario = 'idUsuario';
@@ -92,6 +96,51 @@ class DbHelper {
   static const String C_OrdenParentesco = 'OrdenParentesco';
   static const String C_Parentesco = 'parentesco';
 
+  //Tabla escolaridad seguridad social
+  static const String C_ClaveEscolaridad = 'ClaveEscolaridad';
+  static const String C_OrdenEscolaridad = 'OrdenEscolaridad';
+  static const String C_Escolaridad = 'Escolaridad';
+  static const String C_ClaveGradoEscolar = 'ClaveGradoEscolar';
+  static const String C_GradoEscolar = 'GradoEscolar';
+  static const String C_ClaveAsisteEscuela = 'ClaveAsisteEscuela';
+  static const String C_OrdenAsisteEscuela = 'OrdenAsisteEscuela';
+  static const String C_AsisteEscuela = 'AsisteEscuela';
+  static const String C_ClaveOcupacion = 'ClaveOcupacion';
+  static const String C_OrdenOcupacion = 'OrdenOcupacion';
+  static const String C_Ocupacion = 'Ocupacion';
+  static const String C_ClaveTipoEmpleo = 'ClaveTipoEmpleo';
+  static const String C_OrdenTipoEmpleo = 'OrdenTipoEmpleo';
+  static const String C_TipoEmpleo = 'TipoEmpleo';
+  static const String C_pk_prestacioneslab = 'pk_prestacioneslab';
+  static const String C_int_OrdenPrestacionesLab = 'int_OrdenPrestacionesLab';
+  static const String C_txt_desc_prestacioneslab = 'txt_desc_prestacioneslab';
+  static const String C_ClaveJubilacion = 'ClaveJubilacion';
+  static const String C_OrdenJubilacion = 'OrdenJubilacion';
+  static const String C_Jubilacion = 'Jubilacion';
+  static const String C_ClaveDerechohabiencia = 'ClaveDerechohabiencia';
+  static const String C_OrdenDerechohabiencia = 'OrdenDerechohabiencia';
+  static const String C_Derechohabiencia = 'Derechohabiencia';
+  static const String C_ClaveMotivoDerechohabiencia = 'ClaveMotivoDerechohabiencia';
+  static const String C_OrdenMotivoDerechohabiencia = 'OrdenMotivoDerechohabiencia';
+  static const String C_MotivoDerechohabiencia = 'MotivoDerechohabiencia';
+
+  //Tabla Salud Pertenencia Indigena
+  static const String C_ClaveCapacidadDiferente = 'claveCapacidadDiferente';
+  static const String C_OrdenCapacidadDiferente = 'ordenCapacidadDiferente';
+  static const String C_CapacidadDiferente = 'capacidadDiferente';
+  static const String C_ClaveCondicionesSalud = 'claveCondicionesSalud';
+  static const String C_OrdenCondicionesSalud = 'ordenCondicionesSalud';
+  static const String C_CondicionesSalud = 'condicionesSalud';
+  static const String C_ClaveAdiccion = 'claveAdiccion';
+  static const String C_OrdenAdiccion = 'ordenAdiccion';
+  static const String C_Adiccion = 'adiccion';
+  static const String C_peso = 'peso';
+  static const String C_talla = 'talla';
+  static const String C_imc = 'imc';
+  static const String C_ClaveEtniaIndigena = 'claveEtniaIndigena';
+  static const String C_OrdenEtniaIndigena = 'ordenEtniaIndigena';
+  static const String C_EtniaIndigena = 'etniaIndigena';
+
   Future<Database> get db async {
     if (_db != null) {
       return _db;
@@ -112,7 +161,8 @@ class DbHelper {
     await db.execute("CREATE TABLE $Table_Data ($C_Folio INTEGER not null Primary key AUTOINCREMENT ,$C_FechaCaptura TEXT, $C_Calle TEXT, $C_EntreCalles TEXT, $C_Grupo TEXT,$C_NoExt TEXT,$C_NoInt TEXT,$C_Fecha TEXT,$C_Localidad TEXT,$C_Telefono TEXT,$C_CP TEXT,$C_ClaveEstado TEXT,$C_Estado TEXT, $C_NombreComunidad TEXT, $C_ClaveMunicipio TEXT,$C_Municipio TEXT,$C_ClaveAsentamiento TEXT,$C_NombreAsentamiento TEXT ,$C_ClaveTipoAsentamiento TEXT, $C_OrdenTipoAsentamiento TEXT, $C_TipoAsentamiento TEXT, $C_ClaveTipoVialidad TEXT, $C_OrdenTipoVialidad TEXT, $C_TipoVialidad TEXT);");
     await db.execute("CREATE TABLE $Table_Servicios ($C_Folio int, $C_pk_bano TEXT , $C_int_orden_bano TEXT, $C_txt_desc_bano TEXT, $C_ClaveServAgua TEXT, $C_OrdenServAgua TEXT, $C_ServAgua TEXT, $C_ClaveServGas TEXT, $C_OrdenServGas TEXT, $C_ServGas TEXT, $C_ClaveServLuz TEXT, $C_OrdenServLuz TEXT, $C_ServLuz TEXT, $C_ClaveServSanitario TEXT, $C_OrdenServSanitario TEXT, $C_ServSanitario TEXT);");
     await db.execute("CREATE TABLE $Table_DatosFamiliares ($C_Folio int, $C_Nombres TEXT, $C_PrimerApellido TEXT, $C_SegundoApellido TEXT, $C_Sexo TEXT, $C_FechaNacimiento TEXT, $C_EntidadNacimiento TEXT,$C_ClaveEstadoCivil TEXT ,$C_OrdenEstadoCivil TEXT,$C_EstadoCivil TEXT,$C_ClaveParentesco Text, $C_OrdenParentesco TEXT , $C_Parentesco TEXT);");
-
+    await db.execute("CREATE TABLE $Table_Escolaridad ($C_Folio int, $C_ClaveEscolaridad TEXT, $C_OrdenEscolaridad TEXT, $C_Escolaridad TEXT,$C_ClaveGradoEscolar TEXT,$C_GradoEscolar TEXT,$C_ClaveAsisteEscuela TEXT,$C_OrdenAsisteEscuela TEXT,$C_AsisteEscuela TEXT,$C_ClaveOcupacion TEXT,$C_OrdenOcupacion TEXT,$C_Ocupacion TEXT,$C_ClaveTipoEmpleo TEXT,$C_OrdenTipoEmpleo TEXT,$C_TipoEmpleo TEXT,$C_pk_prestacioneslab TEXT,$C_int_OrdenPrestacionesLab TEXT,$C_txt_desc_prestacioneslab TEXT,$C_ClaveJubilacion TEXT,$C_OrdenJubilacion TEXT,$C_Jubilacion TEXT,$C_ClaveDerechohabiencia TEXT,$C_OrdenDerechohabiencia TEXT,$C_Derechohabiencia TEXT,$C_ClaveMotivoDerechohabiencia TEXT,$C_OrdenMotivoDerechohabiencia TEXT,$C_MotivoDerechohabiencia TEXT);");
+    await db.execute("CREATE TABLE $Table_Salud ($C_Folio int,$C_ClaveCapacidadDiferente TEXT,$C_OrdenCapacidadDiferente TEXT,$C_CapacidadDiferente TEXT,$C_ClaveCondicionesSalud TEXT,$C_OrdenCondicionesSalud TEXT,$C_CondicionesSalud TEXT,$C_ClaveAdiccion TEXT,$C_OrdenAdiccion TEXT,$C_Adiccion TEXT,$C_peso int,$C_talla int,$C_imc double,$C_ClaveEtniaIndigena TEXT,$C_OrdenEtniaIndigena TEXT,$C_EtniaIndigena TEXT);");
 
     //NOMBRE ASENTAMIENTO
     await db.execute("CREATE TABLE Asentamientos (NombreAsentamientos TEXT);");
@@ -530,6 +580,18 @@ class DbHelper {
   Future<int> saveEstructuraFamiliar(EstructuraFamilarModel estructuraFamilar)async {
     var dbClient = await db;
     var res = await dbClient.insert(Table_DatosFamiliares, estructuraFamilar.toMap());
+    return res;
+  }
+
+  Future<int> saveEscolaridadSocial(EscolaridadSeguridadSocial escolaridadSeguridadSocial)async {
+    var dbClient = await db;
+    var res = await dbClient.insert(Table_Escolaridad, escolaridadSeguridadSocial.toMap());
+    return res;
+  }
+
+  Future<int> saveSaludIndigena(SaludPerteneciaIndigenaModel saludPerteneciaIndigenaModel)async {
+    var dbClient = await db;
+    var res = await dbClient.insert(Table_Salud, saludPerteneciaIndigenaModel.toMap());
     return res;
   }
 
