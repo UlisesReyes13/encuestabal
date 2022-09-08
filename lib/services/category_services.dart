@@ -73,4 +73,24 @@ class CategoryService {
   readCategoriesPuebloIndigena() async {
     return await _repository.readData('tb_EtniasIndigenas');
   }
+  
+  readCategoriesTipoVivienda() async {
+    return await _repository.readData('tb_TipoVivienda');
+  }
+
+  readCategoriesTipoPiso() async{
+    return await _repository.readData('tb_TipoPisos');
+  }
+  
+  readCategoriesTipoTenencia() async {
+    return await _repository.readData('tb_Tenencias');
+  }
+
+  readCategoriesTipoTecho() async{
+    return await _repository.readData('tb_Techos');
+  }
+
+  readCategoriesTipoMuro() async {
+    return await _repository.readData('tb_TiposMuro');
+  }
 }

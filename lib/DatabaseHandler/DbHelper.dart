@@ -502,6 +502,56 @@ class DbHelper {
     await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('68 67 Zapoteco');");
     await db.execute("INSERT INTO tb_EtniasIndigenas (EtniaIndigena) VALUES ('69 68 Zoque');");
 
+    //Tabla de tipo de vivienda
+    await db.execute("CREATE TABLE tb_TipoVivienda (TipoVivienda TEXT);");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('1 1 Unifamiliar');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('2 2 Dúplex');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('3 3 Compartida');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('4 4 Otra');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('5 5 Independiente');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('6 6 U. habitacional');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('7 7 Vecindad');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('8 8 Anexo a casa	');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('9 9 Vivienda móvil');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('10 10 Refugio');");
+    await db.execute("INSERT INTO tb_TipoVivienda (TipoVivienda) VALUES ('11 11 N/A');");
+
+    //Tabla de tipo de piso
+    await db.execute("CREATE TABLE tb_TipoPisos (TipoPiso TEXT);");
+    await db.execute("INSERT INTO tb_TipoPisos (TipoPiso) VALUES ('1 1 Madera, duela');");
+    await db.execute("INSERT INTO tb_TipoPisos (TipoPiso) VALUES ('2 2 Mosaico, vinil');");
+    await db.execute("INSERT INTO tb_TipoPisos (TipoPiso) VALUES ('3 3 Cemento o firme');");
+    await db.execute("INSERT INTO tb_TipoPisos (TipoPiso) VALUES ('4 4 Tierra');");
+    await db.execute("INSERT INTO tb_TipoPisos (TipoPiso) VALUES ('5 5 Otro');");
+
+    //Tabla de tipo de tenencia
+    await db.execute("CREATE TABLE tb_Tenencias (Tenencia TEXT);");
+    await db.execute("INSERT INTO tb_Tenencias (Tenencia) VALUES ('1 1 Propia');");
+    await db.execute("INSERT INTO tb_Tenencias (Tenencia) VALUES ('2 2 Rentada');");
+    await db.execute("INSERT INTO tb_Tenencias (Tenencia) VALUES ('3 3 Pagándose');");
+    await db.execute("INSERT INTO tb_Tenencias (Tenencia) VALUES ('4 4 Prestada');");
+    await db.execute("INSERT INTO tb_Tenencias (Tenencia) VALUES ('5 5 Asentamiento irregular');");
+    await db.execute("INSERT INTO tb_Tenencias (Tenencia) VALUES ('6 6 Otro');");
+    await db.execute("INSERT INTO tb_Tenencias (Tenencia) VALUES ('7 7 N/A');");
+
+    //Tabla de tipo de techo
+    await db.execute("CREATE TABLE tb_Techos (Techo TEXT);");
+    await db.execute("INSERT INTO tb_Techos (Techo) VALUES ('1 1 Concreto, losa o viguetas');");
+    await db.execute("INSERT INTO tb_Techos (Techo) VALUES ('2 2 Lámina de cartón');");
+    await db.execute("INSERT INTO tb_Techos (Techo) VALUES ('3 3 Lámina asbesto, metálica');");
+    await db.execute("INSERT INTO tb_Techos (Techo) VALUES ('4 4 Madera, teja');");
+    await db.execute("INSERT INTO tb_Techos (Techo) VALUES ('5 5 Paja o palma');");
+    await db.execute("INSERT INTO tb_Techos (Techo) VALUES ('6 6 Otros');");
+
+    //Tabla de tipo de muro
+    await db.execute("CREATE TABLE tb_TiposMuro (TipoMuro TEXT);");
+    await db.execute("INSERT INTO tb_TiposMuro (TipoMuro) VALUES ('1 1 MADERA');");
+    await db.execute("INSERT INTO tb_TiposMuro (TipoMuro) VALUES ('2 2 ADOBE');");
+    await db.execute("INSERT INTO tb_TiposMuro (TipoMuro) VALUES ('3 3 LADRILLO, TABIQUE');");
+    await db.execute("INSERT INTO tb_TiposMuro (TipoMuro) VALUES ('4 4 LAMINA METALICA, ASBESTO');");
+    await db.execute("INSERT INTO tb_TiposMuro (TipoMuro) VALUES ('5 5 DESHECHOS, CARTON');");
+    await db.execute("INSERT INTO tb_TiposMuro (TipoMuro) VALUES ('6 6 CARRIZO, BAMBU');");
+    await db.execute("INSERT INTO tb_TiposMuro (TipoMuro) VALUES ('7 7 OTROS');");
 
   }
 

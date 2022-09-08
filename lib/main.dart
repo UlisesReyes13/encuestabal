@@ -1,5 +1,4 @@
-import 'package:encuestabal/Screens/Escolaridad_SeguridadSocial.dart';
-import 'package:encuestabal/Screens/Salud_PerteneciaIndigena.dart';
+import 'package:encuestabal/Screens/Equipamiento.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/LoginForm.dart';
@@ -13,11 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'ESM',
+      title: 'ESN',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Escolaridad_SeguridadSocial('2'),
+      home: Equipamineto('1'),
     );
   }
 }
