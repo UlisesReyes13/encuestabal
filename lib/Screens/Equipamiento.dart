@@ -3,6 +3,7 @@ import 'package:encuestabal/Comm/genTextFolio.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
 import 'package:encuestabal/Screens/Caracteristicas_Casa.dart';
 import 'package:flutter/material.dart';
+import 'package:searchfield/searchfield.dart';
 
 enum Refrigerador { si, no }
 
@@ -26,7 +27,7 @@ enum LicuadoraSirve { si, no }
 
 enum Television { si, no }
 
-enum TelevisonSirve { si, no }
+enum TelevisionSirve { si, no }
 
 enum RadioE { si, no }
 
@@ -88,7 +89,7 @@ class _EquipaminetoState extends State<Equipamineto> {
   Licuadora _licuadora = Licuadora.si;
   LicuadoraSirve _licuadoraSirve = LicuadoraSirve.si;
   Television _television = Television.si;
-  TelevisonSirve _televisonSirve = TelevisonSirve.si;
+  TelevisionSirve _televisonSirve = TelevisionSirve.si;
   RadioE _radio = RadioE.si;
   RadioSirve _radioSirve = RadioSirve.si;
   Sala _sala = Sala.si;
@@ -109,6 +110,10 @@ class _EquipaminetoState extends State<Equipamineto> {
   HornoSirve _hornoSirve = HornoSirve.si;
   Telefono _telefono = Telefono.si;
   TelefonoSirve _telefonoSirve = TelefonoSirve.si;
+  final _condiciones = TextEditingController();
+
+  List<String> _Condiciones = ['Buena','Regular','Mala'];
+  String selectedItem = 'Seleccionar';
 
   @override
   Widget build(BuildContext context) {
@@ -118,12 +123,32 @@ class _EquipaminetoState extends State<Equipamineto> {
     var estufa = 115.0;
     var video = 5.0;
     var lavadora = 92.0;
+    var licuadora = 86.0;
+    var television = 87.0;
+    var radio = 125.0;
+    var sala = 137.0;
+    var comedor = 100.0;
+    var automovil = 94.0;
+    var cama = 130.0;
+    var celular = 120.0;
+    var motocicleta = 80.0;
+    var computadora = 67.0;
+    var horno = 130.0;
+    var telefono = 110.0;
+
     if (orientation == Orientation.landscape) {
       tiene = 150.0;
       sirve = 450.0;
       estufa = 115.00;
       video = 4.0;
       lavadora = 89.0;
+      licuadora = 86.0;
+      television = 87.0;
+      radio = 125.0;
+      sala = 137.0;
+      comedor = 100.0;
+      automovil = 94.0;
+      cama = 130.0;
     }
     return Scaffold(
       appBar: AppBar(
@@ -168,9 +193,10 @@ class _EquipaminetoState extends State<Equipamineto> {
                   height: 20,
                   thickness: 5,
                   indent: 20,
-                  endIndent: 0,
+                  endIndent: 20,
                   color: Colors.black,
                 ),
+                //Refrigerador
                 Row(
                   children: <Widget>[
                     getTextQuestion(question: 'Refrigerador'),
@@ -237,6 +263,7 @@ class _EquipaminetoState extends State<Equipamineto> {
                     ),
                   ],
                 ),
+                //Estufa
                 Row(
                   children: <Widget>[
                     getTextQuestion(question: 'Estufa'),
@@ -302,6 +329,7 @@ class _EquipaminetoState extends State<Equipamineto> {
                     ),
                   ],
                 ),
+                //Video, DVD
                 Row(
                   children: <Widget>[
                     getTextQuestion(question: 'Video, DVD, Blu-ray'),
@@ -367,6 +395,7 @@ class _EquipaminetoState extends State<Equipamineto> {
                     ),
                   ],
                 ),
+                //Lavadora
                 Row(
                   children: <Widget>[
                     getTextQuestion(question: 'Lavadora'),
@@ -432,10 +461,11 @@ class _EquipaminetoState extends State<Equipamineto> {
                     ),
                   ],
                 ),
+                //Licuadora
                 Row(
                   children: <Widget>[
                     getTextQuestion(question: 'Licuadora'),
-                    SizedBox(width: lavadora),
+                    SizedBox(width: licuadora),
                     //Licuadora
                     Expanded(
                       child: ListTile(
@@ -496,6 +526,782 @@ class _EquipaminetoState extends State<Equipamineto> {
                       ),
                     ),
                   ],
+                ),
+                //Television
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Televisión'),
+                    SizedBox(width: television),
+                    //Televisión
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Television>(
+                          value: Television.si,
+                          groupValue: _television,
+                          onChanged: (Television value) {
+                            setState(() {
+                              _television = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Television>(
+                          value: Television.no,
+                          groupValue: _television,
+                          onChanged: (Television value) {
+                            setState(() {
+                              _television = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<TelevisionSirve>(
+                          value: TelevisionSirve.si,
+                          groupValue: _televisonSirve,
+                          onChanged: (TelevisionSirve value) {
+                            setState(() {
+                              _televisonSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<LavadoraSirve>(
+                          value: LavadoraSirve.no,
+                          groupValue: _lavadoraSirve,
+                          onChanged: (LavadoraSirve value) {
+                            setState(() {
+                              _lavadoraSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Radio
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Radio'),
+                    SizedBox(width: radio),
+                    //Radio
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<RadioE>(
+                          value: RadioE.si,
+                          groupValue: _radio,
+                          onChanged: (RadioE value) {
+                            setState(() {
+                              _radio = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<RadioE>(
+                          value: RadioE.no,
+                          groupValue: _radio,
+                          onChanged: (RadioE value) {
+                            setState(() {
+                              _radio = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<RadioSirve>(
+                          value: RadioSirve.si,
+                          groupValue: _radioSirve,
+                          onChanged: (RadioSirve value) {
+                            setState(() {
+                              _radioSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<RadioSirve>(
+                          value: RadioSirve.no,
+                          groupValue: _radioSirve,
+                          onChanged: (RadioSirve value) {
+                            setState(() {
+                              _radioSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Sala
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Sala'),
+                    SizedBox(width: sala),
+                    //Sala
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Sala>(
+                          value: Sala.si,
+                          groupValue: _sala,
+                          onChanged: (Sala value) {
+                            setState(() {
+                              _sala = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Sala>(
+                          value: Sala.no,
+                          groupValue: _sala,
+                          onChanged: (Sala value) {
+                            setState(() {
+                              _sala = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<SalaSirve>(
+                          value: SalaSirve.si,
+                          groupValue: _salaSirve,
+                          onChanged: (SalaSirve value) {
+                            setState(() {
+                              _salaSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<SalaSirve>(
+                          value: SalaSirve.no,
+                          groupValue: _salaSirve,
+                          onChanged: (SalaSirve value) {
+                            setState(() {
+                              _salaSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Comedor
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Comedor'),
+                    SizedBox(width: comedor),
+                    //Comedor
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Comedor>(
+                          value: Comedor.si,
+                          groupValue: _comedor,
+                          onChanged: (Comedor value) {
+                            setState(() {
+                              _comedor = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Comedor>(
+                          value: Comedor.no,
+                          groupValue: _comedor,
+                          onChanged: (Comedor value) {
+                            setState(() {
+                              _comedor = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<ComedorSirve>(
+                          value: ComedorSirve.si,
+                          groupValue: _comedorSirve,
+                          onChanged: (ComedorSirve value) {
+                            setState(() {
+                              _comedorSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<ComedorSirve>(
+                          value: ComedorSirve.no,
+                          groupValue: _comedorSirve,
+                          onChanged: (ComedorSirve value) {
+                            setState(() {
+                              _comedorSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Automovil
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Automóvil'),
+                    SizedBox(width: automovil),
+                    //Automóvil
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Automovil>(
+                          value: Automovil.si,
+                          groupValue: _automovil,
+                          onChanged: (Automovil value) {
+                            setState(() {
+                              _automovil = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Automovil>(
+                          value: Automovil.no,
+                          groupValue: _automovil,
+                          onChanged: (Automovil value) {
+                            setState(() {
+                              _automovil = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<AutomovilSirve>(
+                          value: AutomovilSirve.si,
+                          groupValue: _automovilSirve,
+                          onChanged: (AutomovilSirve value) {
+                            setState(() {
+                              _automovilSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<AutomovilSirve>(
+                          value: AutomovilSirve.no,
+                          groupValue: _automovilSirve,
+                          onChanged: (AutomovilSirve value) {
+                            setState(() {
+                              _automovilSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Cama
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Cama'),
+                    SizedBox(width: cama),
+                    //Cama
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Cama>(
+                          value: Cama.si,
+                          groupValue: _cama,
+                          onChanged: (Cama value) {
+                            setState(() {
+                              _cama = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Cama>(
+                          value: Cama.no,
+                          groupValue: _cama,
+                          onChanged: (Cama value) {
+                            setState(() {
+                              _cama = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<CamaSirve>(
+                          value: CamaSirve.si,
+                          groupValue: _camaSirve,
+                          onChanged: (CamaSirve value) {
+                            setState(() {
+                              _camaSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<CamaSirve>(
+                          value: CamaSirve.no,
+                          groupValue: _camaSirve,
+                          onChanged: (CamaSirve value) {
+                            setState(() {
+                              _camaSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Celular
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Celular'),
+                    SizedBox(width: celular),
+                    //Celular
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Celular>(
+                          value: Celular.si,
+                          groupValue: _celular,
+                          onChanged: (Celular value) {
+                            setState(() {
+                              _celular = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Celular>(
+                          value: Celular.no,
+                          groupValue: _celular,
+                          onChanged: (Celular value) {
+                            setState(() {
+                              _celular = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<CelularSirve>(
+                          value: CelularSirve.si,
+                          groupValue: _celularSirve,
+                          onChanged: (CelularSirve value) {
+                            setState(() {
+                              _celularSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<CelularSirve>(
+                          value: CelularSirve.no,
+                          groupValue: _celularSirve,
+                          onChanged: (CelularSirve value) {
+                            setState(() {
+                              _celularSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Motocicleta
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Motocicleta'),
+                    SizedBox(width: motocicleta),
+                    //Motocicleta
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Motocicleta>(
+                          value: Motocicleta.si,
+                          groupValue: _motocicleta,
+                          onChanged: (Motocicleta value) {
+                            setState(() {
+                              _motocicleta = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Motocicleta>(
+                          value: Motocicleta.no,
+                          groupValue: _motocicleta,
+                          onChanged: (Motocicleta value) {
+                            setState(() {
+                              _motocicleta = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<MotocicletaSirve>(
+                          value: MotocicletaSirve.si,
+                          groupValue: _motocicletaSirve,
+                          onChanged: (MotocicletaSirve value) {
+                            setState(() {
+                              _motocicletaSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<MotocicletaSirve>(
+                          value: MotocicletaSirve.no,
+                          groupValue: _motocicletaSirve,
+                          onChanged: (MotocicletaSirve value) {
+                            setState(() {
+                              _motocicletaSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Computadora
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Computadora'),
+                    SizedBox(width: computadora),
+                    //Computadora
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Computadora>(
+                          value: Computadora.si,
+                          groupValue: _computadora,
+                          onChanged: (Computadora value) {
+                            setState(() {
+                              _computadora = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Computadora>(
+                          value: Computadora.no,
+                          groupValue: _computadora,
+                          onChanged: (Computadora value) {
+                            setState(() {
+                              _computadora = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<ComputadoraSirve>(
+                          value: ComputadoraSirve.si,
+                          groupValue: _computadoraSirve,
+                          onChanged: (ComputadoraSirve value) {
+                            setState(() {
+                              _computadoraSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<ComputadoraSirve>(
+                          value: ComputadoraSirve.no,
+                          groupValue: _computadoraSirve,
+                          onChanged: (ComputadoraSirve value) {
+                            setState(() {
+                              _computadoraSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Horno
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Horno'),
+                    SizedBox(width: horno),
+                    //Horno
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Horno>(
+                          value: Horno.si,
+                          groupValue: _horno,
+                          onChanged: (Horno value) {
+                            setState(() {
+                              _horno = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Horno>(
+                          value: Horno.no,
+                          groupValue: _horno,
+                          onChanged: (Horno value) {
+                            setState(() {
+                              _horno = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<HornoSirve>(
+                          value: HornoSirve.si,
+                          groupValue: _hornoSirve,
+                          onChanged: (HornoSirve value) {
+                            setState(() {
+                              _hornoSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<HornoSirve>(
+                          value: HornoSirve.no,
+                          groupValue: _hornoSirve,
+                          onChanged: (HornoSirve value) {
+                            setState(() {
+                              _hornoSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Telefono
+                Row(
+                  children: <Widget>[
+                    getTextQuestion(question: 'Teléfono'),
+                    SizedBox(width: telefono),
+                    //Telefono
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<Telefono>(
+                          value: Telefono.si,
+                          groupValue: _telefono,
+                          onChanged: (Telefono value) {
+                            setState(() {
+                              _telefono = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<Telefono>(
+                          value: Telefono.no,
+                          groupValue: _telefono,
+                          onChanged: (Telefono value) {
+                            setState(() {
+                              _telefono = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //SIRVE
+                    Expanded(
+                      child: ListTile(
+                        title: Text('Si'),
+                        leading: Radio<TelefonoSirve>(
+                          value: TelefonoSirve.si,
+                          groupValue: _telefonoSirve,
+                          onChanged: (TelefonoSirve value) {
+                            setState(() {
+                              _telefonoSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text('No'),
+                        leading: Radio<TelefonoSirve>(
+                          value: TelefonoSirve.no,
+                          groupValue: _telefonoSirve,
+                          onChanged: (TelefonoSirve value) {
+                            setState(() {
+                              _telefonoSirve = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 5.0),
+                const Divider(
+                  height: 20,
+                  thickness: 5,
+                  indent: 20,
+                  endIndent: 20,
+                  color: Colors.black,
+                ),
+                getTextQuestion(question: 'Condiciones Generales Del Equipamiento'),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: SearchField(
+                    suggestionState: Suggestion.expand,
+                    searchInputDecoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[120],
+                    ),
+                    suggestions: _Condiciones.map((condiciones) =>
+                        SearchFieldListItem(condiciones.toString(), item: condiciones)).toList(),
+                    textInputAction: TextInputAction.next,
+                    hasOverlay: false,
+                    controller: _condiciones,
+                    maxSuggestionsInViewPort: 5,
+                    itemHeight: 45,
+                    onSuggestionTap: (x){},
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(20.0),
+                  width: double.infinity,
+                  child: FlatButton.icon(
+                    onPressed: (){
+
+                    },
+                    icon: Icon(Icons.arrow_forward,color: Colors.white),
+                    label: Text('Continuar', style: TextStyle(color: Colors.white),),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
                 ),
               ],
             ),

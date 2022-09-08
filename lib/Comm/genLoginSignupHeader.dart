@@ -21,8 +21,8 @@ class genLoginSignupHeader extends StatelessWidget {
           SizedBox(height: 10.0),
           Image.asset(
             "assets/images/logo.png",
-            height: 150.0,
-            width: 150.0,
+            height: 300.0,
+            width: 300.0,
           ),
           SizedBox(height: 10.0),
           Text(
