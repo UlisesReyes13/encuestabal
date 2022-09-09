@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 
-class getTextEquipamiento extends StatelessWidget {
+class getTextAportaciones extends StatelessWidget {
+
   String encabezado;
 
-  getTextEquipamiento({this.encabezado});
+  getTextAportaciones({this.encabezado});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(encabezado,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
-                fontSize: 24.0
+                fontSize: 30.0
             ),)
         ],
       ),
     );
   }
 }
+

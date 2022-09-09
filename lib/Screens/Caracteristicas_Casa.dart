@@ -1,6 +1,10 @@
+import 'package:encuestabal/Comm/comHelper.dart';
 import 'package:encuestabal/Comm/genTextField.dart';
 import 'package:encuestabal/Comm/genTextFolio.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
+import 'package:encuestabal/DatabaseHandler/DbHelper.dart';
+import 'package:encuestabal/Model/CaracteristicasCasa.dart';
+import 'package:encuestabal/Screens/Equipamiento.dart';
 import 'package:encuestabal/Screens/Infraestructura_Vivienda.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +26,36 @@ class _Caracteristicas_CasaState extends State<Caracteristicas_Casa> {
   final _numCuartosDormir = TextEditingController();
   CocinaSeparada _cocinaSeparada = CocinaSeparada.si;
   CuartoBanio _cuartoBanio = CuartoBanio.si;
+
+  var dbHelper;
+  @override
+  void initState() {
+
+    super.initState();
+    dbHelper = DbHelper();
+  }
+
+  insertDatos() async {
+
+    CaracteristicasCasa DModel = CaracteristicasCasa
+      (folio: int.parse(widget.folio),
+        numCuartos: _numCuartos.text.toString(),
+        cuartosDormir: _numCuartosDormir.text.toString(),
+        cocinaSeparada: _cocinaSeparada.name,
+        cuartoBanioExclusivo:_cuartoBanio.name
+    );
+
+    await dbHelper.saveCasa(DModel).then((caracteristicasCasa) {
+      alertDialog(context, "Se registro correctamente");
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+        return new Equipamineto(widget.folio);
+      }
+      ));
+    }).catchError((error) {
+      print(error);
+      alertDialog(context, "Error: No se guardaron los datos");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,9 +149,7 @@ class _Caracteristicas_CasaState extends State<Caracteristicas_Casa> {
                     margin: EdgeInsets.all(20.0),
                     width: double.infinity,
                     child: FlatButton.icon(
-                        onPressed: (){
-
-                        },
+                        onPressed: insertDatos,
                         icon: Icon(Icons.arrow_forward,color: Colors.white,),
                         label: Text('Continuar', style: TextStyle(color: Colors.white)
                           ,)

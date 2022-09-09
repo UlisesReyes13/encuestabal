@@ -1,11 +1,14 @@
+import 'package:encuestabal/Comm/comHelper.dart';
 import 'package:encuestabal/Comm/genTextFolio.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
 import 'package:encuestabal/DatabaseHandler/DbHelper.dart';
+import 'package:encuestabal/Model/EstadoCasaConstruccionModel.dart';
 import 'package:encuestabal/Model/TipoMuroModel.dart';
 import 'package:encuestabal/Model/TipoPisoModel.dart';
 import 'package:encuestabal/Model/TipoTechoModel.dart';
 import 'package:encuestabal/Model/TipoTenenciaModel.dart';
 import 'package:encuestabal/Model/TipoViviendaModel.dart';
+import 'package:encuestabal/Screens/Caracteristicas_Casa.dart';
 import 'package:encuestabal/Screens/Salud_PerteneciaIndigena.dart';
 import 'package:encuestabal/services/category_services.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +109,103 @@ class _Infraestructura_ViviendaState extends State<Infraestructura_Vivienda> {
         categoryModel.TipoMuro = category['TipoMuro'];
         _TipoMuro.add(categoryModel);
       });
+    });
+  }
+
+  insertDatos() async {
+    var TipoCasa = _tipoCasa.text.toString(); // 'artlang'
+    final tipoCasa = TipoCasa
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var TipoPiso = _tipoPiso.text.toString(); // 'artlang'
+    final tipoPiso = TipoPiso
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var TipoTenencia = _tipoTenencia.text.toString(); // 'artlang'
+    final tipoTenencia = TipoTenencia
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var TipoMuro = _tipoMuro.text.toString(); // 'artlang'
+    final tipoMuro = TipoMuro
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    var TipoTecho = _tipoTecho.text.toString(); // 'artlang'
+    final tipoTecho = TipoTecho
+        .replaceAll("1", "")
+        .replaceAll("2", "")
+        .replaceAll("3", "")
+        .replaceAll("4", "")
+        .replaceAll("5", "")
+        .replaceAll("6", "")
+        .replaceAll("7", "")
+        .replaceAll("8", "")
+        .replaceAll("9", "")
+        .replaceAll("0", "");
+
+    EstadoCasaConstruccionModel DModel = EstadoCasaConstruccionModel
+      (folio: int.parse(widget.folio),
+        ClaveTipoVivienda: _tipoCasa.text.toString().substring(0, 1),
+        OrdenTipoVivienda: _tipoCasa.text.toString().substring(0, 1),
+        TipoVivienda: tipoCasa.trimLeft(),
+        ClaveTipoPiso: _tipoPiso.text.toString().substring(0, 1),
+        OrdenTipoPiso: _tipoPiso.text.toString().substring(0, 1),
+        TipoPiso: tipoPiso.trimLeft(),
+        ClaveTenencia: _tipoTenencia.text.toString().substring(0, 1),
+        OrdenTenencia: _tipoTenencia.text.toString().substring(0, 1),
+        Tenencia: tipoTenencia.trimLeft(),
+        ClaveTecho: _tipoTecho.text.toString().substring(0, 1),
+        OrdenTecho: _tipoTecho.text.toString().substring(0, 1),
+        Techo: tipoTecho.trimLeft(),
+        ClaveTipoMuro: _tipoMuro.text.toString().substring(0, 1),
+        OrdenTipoMuro: _tipoMuro.text.toString().substring(0, 1),
+        TipoMuro: tipoMuro.trimLeft()
+    );
+
+    await dbHelper.saveVivienda(DModel).then((estadoCasaConstruccionModel) {
+      alertDialog(context, "Se registro correctamente");
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+        return new Caracteristicas_Casa(widget.folio);
+      }
+      ));
+    }).catchError((error) {
+      print(error);
+      alertDialog(context, "Error: No se guardaron los datos");
     });
   }
 
@@ -297,9 +397,7 @@ class _Infraestructura_ViviendaState extends State<Infraestructura_Vivienda> {
                   margin: EdgeInsets.all(20.0),
                   width: double.infinity,
                   child: FlatButton.icon(
-                      onPressed: (){
-
-                      },
+                      onPressed: insertDatos,
                       icon: Icon(Icons.arrow_forward,color: Colors.white,),
                       label: Text('Continuar', style: TextStyle(color: Colors.white)
                         ,)

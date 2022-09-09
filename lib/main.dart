@@ -1,3 +1,5 @@
+import 'package:encuestabal/Screens/AportacionesEconomicas.dart';
+import 'package:encuestabal/Screens/DatosGenerales.dart';
 import 'package:encuestabal/Screens/Equipamiento.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Equipamineto('1'),
+      home: AportacionesEconomicas('1'),
     );
   }
 }

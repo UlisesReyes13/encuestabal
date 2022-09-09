@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:encuestabal/Model/Agua.dart';
+import 'package:encuestabal/Model/CaracteristicasCasa.dart';
 import 'package:encuestabal/Model/Drenaje.dart';
 import 'package:encuestabal/Model/EscolaridadSeguridadSocial.dart';
+import 'package:encuestabal/Model/EstadoCasaConstruccionModel.dart';
 import 'package:encuestabal/Model/EstructuraFamiliarModel.dart';
 import 'package:encuestabal/Model/Gas.dart';
 import 'package:encuestabal/Model/Luz.dart';
@@ -26,6 +28,9 @@ class DbHelper {
   static const String Table_DatosFamiliares= 'estructuraFamiliar';
   static const String Table_Escolaridad= 'escolaridadSeguridadSocial';
   static const String Table_Salud= 'saludPertenenciaIndigena';
+  static const String Table_Vivienda = 'estadoDeLaCasaYConstruccion';
+  static const String Table_Casa = 'caracteristicas_Casa';
+
   static const int Version = 3;
 
   static const String C_idUsuario = 'idUsuario';
@@ -141,6 +146,30 @@ class DbHelper {
   static const String C_OrdenEtniaIndigena = 'ordenEtniaIndigena';
   static const String C_EtniaIndigena = 'etniaIndigena';
 
+  //Tabla Estado de la casa y construcion
+  static const String C_ClaveTipoVivienda = 'ClaveTipoVivienda';
+  static const String C_OrdenTipoVivienda = 'OrdenTipoVivienda';
+  static const String C_TipoVivienda = 'TipoVivienda';
+  static const String C_ClaveTipoPiso = 'ClaveTipoPiso';
+  static const String C_OrdenTipoPiso = 'OrdenTipoPiso';
+  static const String C_TipoPiso = 'TipoPiso';
+  static const String C_ClaveTenencia = 'ClaveTenencia';
+  static const String C_OrdenTenencia = 'OrdenTenencia';
+  static const String C_Tenencia = 'Tenencia';
+  static const String C_ClaveTecho = 'ClaveTecho';
+  static const String C_OrdenTecho = 'OrdenTecho';
+  static const String C_Techo = 'Techo';
+  static const String C_ClaveTipoMuro = 'ClaveTipoMuro';
+  static const String C_OrdenTipoMuro = 'OrdenTipoMuro';
+  static const String C_TipoMuro = 'TipoMuro';
+
+  //Tabla Estado de la casa y construcion
+  static const String C_numCuartos = 'numCuartos';
+  static const String C_cuartosDormir = 'cuartosDormir';
+  static const String C_cocinaSeparada = 'cocinaSeparada';
+  static const String C_cuartoBanioExclusivo = 'cuartoBanioExclusivo';
+
+
   Future<Database> get db async {
     if (_db != null) {
       return _db;
@@ -163,6 +192,8 @@ class DbHelper {
     await db.execute("CREATE TABLE $Table_DatosFamiliares ($C_Folio int, $C_Nombres TEXT, $C_PrimerApellido TEXT, $C_SegundoApellido TEXT, $C_Sexo TEXT, $C_FechaNacimiento TEXT, $C_EntidadNacimiento TEXT,$C_ClaveEstadoCivil TEXT ,$C_OrdenEstadoCivil TEXT,$C_EstadoCivil TEXT,$C_ClaveParentesco Text, $C_OrdenParentesco TEXT , $C_Parentesco TEXT);");
     await db.execute("CREATE TABLE $Table_Escolaridad ($C_Folio int, $C_ClaveEscolaridad TEXT, $C_OrdenEscolaridad TEXT, $C_Escolaridad TEXT,$C_ClaveGradoEscolar TEXT,$C_GradoEscolar TEXT,$C_ClaveAsisteEscuela TEXT,$C_OrdenAsisteEscuela TEXT,$C_AsisteEscuela TEXT,$C_ClaveOcupacion TEXT,$C_OrdenOcupacion TEXT,$C_Ocupacion TEXT,$C_ClaveTipoEmpleo TEXT,$C_OrdenTipoEmpleo TEXT,$C_TipoEmpleo TEXT,$C_pk_prestacioneslab TEXT,$C_int_OrdenPrestacionesLab TEXT,$C_txt_desc_prestacioneslab TEXT,$C_ClaveJubilacion TEXT,$C_OrdenJubilacion TEXT,$C_Jubilacion TEXT,$C_ClaveDerechohabiencia TEXT,$C_OrdenDerechohabiencia TEXT,$C_Derechohabiencia TEXT,$C_ClaveMotivoDerechohabiencia TEXT,$C_OrdenMotivoDerechohabiencia TEXT,$C_MotivoDerechohabiencia TEXT);");
     await db.execute("CREATE TABLE $Table_Salud ($C_Folio int,$C_ClaveCapacidadDiferente TEXT,$C_OrdenCapacidadDiferente TEXT,$C_CapacidadDiferente TEXT,$C_ClaveCondicionesSalud TEXT,$C_OrdenCondicionesSalud TEXT,$C_CondicionesSalud TEXT,$C_ClaveAdiccion TEXT,$C_OrdenAdiccion TEXT,$C_Adiccion TEXT,$C_peso int,$C_talla int,$C_imc double,$C_ClaveEtniaIndigena TEXT,$C_OrdenEtniaIndigena TEXT,$C_EtniaIndigena TEXT);");
+    await db.execute("CREATE TABLE $Table_Vivienda ($C_Folio int,$C_ClaveTipoVivienda TEXT,$C_OrdenTipoVivienda TEXT,$C_TipoVivienda TEXT,$C_ClaveTipoPiso TEXT,$C_OrdenTipoPiso TEXT,$C_TipoPiso TEXT,$C_ClaveTenencia TEXT,$C_OrdenTenencia TEXT,$C_Tenencia TEXT,$C_ClaveTecho TEXT,$C_OrdenTecho TEXT,$C_Techo TEXT,$C_ClaveTipoMuro TEXT,$C_OrdenTipoMuro TEXT,$C_TipoMuro TEXT);");
+    await db.execute("CREATE TABLE $Table_Casa ($C_Folio int,$C_numCuartos TEXT ,$C_cuartosDormir TEXT,$C_cocinaSeparada TEXT,$C_cuartoBanioExclusivo TEXT);");
 
     //NOMBRE ASENTAMIENTO
     await db.execute("CREATE TABLE Asentamientos (NombreAsentamientos TEXT);");
@@ -644,5 +675,19 @@ class DbHelper {
     var res = await dbClient.insert(Table_Salud, saludPerteneciaIndigenaModel.toMap());
     return res;
   }
+
+  Future<int> saveVivienda(EstadoCasaConstruccionModel estadoCasaConstruccionModel)async {
+    var dbClient = await db;
+    var res = await dbClient.insert(Table_Vivienda, estadoCasaConstruccionModel.toMap());
+    return res;
+  }
+
+  Future<int> saveCasa(CaracteristicasCasa caracteristicasCasa)async {
+    var dbClient = await db;
+    var res = await dbClient.insert(Table_Casa, caracteristicasCasa.toMap());
+    return res;
+  }
+
+
 
 }

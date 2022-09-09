@@ -11,6 +11,7 @@ import 'package:encuestabal/Model/DiscapacidadesModel.dart';
 import 'package:encuestabal/Model/PuebloIndigenaModel.dart';
 import 'package:encuestabal/Model/SaludPerteneciaIndigenaModel.dart';
 import 'package:encuestabal/Screens/Escolaridad_SeguridadSocial.dart';
+import 'package:encuestabal/Screens/Infraestructura_Vivienda.dart';
 import 'package:encuestabal/services/category_services.dart';
 import 'package:flutter/material.dart';
 import 'package:searchfield/searchfield.dart';
@@ -198,7 +199,7 @@ class _Salud_PertenenciaIndigenaState extends State<Salud_PertenenciaIndigena> {
       alertDialog(context, "Se registro correctamente");
 
       Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
-        return new Salud_PertenenciaIndigena(widget.folio);
+        return new Infraestructura_Vivienda(widget.folio);
       }
       ));
     }).catchError((error) {
