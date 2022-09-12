@@ -58,10 +58,17 @@ class _DatosGeneralesState extends State<DatosGenerales> {
     getAllCategoriesTiposAsentamientos();
     getAllCategoriesTipoVialidad();
     getFolio();
+    getDate();
     super.initState();
     dbHelper = DbHelper();
   }
 
+  getDate(){
+    var now = new DateTime.now();
+    var formato = new DateFormat('yyyy-MM-dd');
+    String fecha = formato.format(now);
+    _fecha.text = fecha;
+  }
   getAllCategoriesNombreAsentamiento() async {
     _NombreAsentamiento = List<NombreAsentamiento>();
     var categories = await CategoryService().readCtegoriesNomAsen();
@@ -541,40 +548,6 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                 getTextField(
                   controller: _folio,
                 ),
-                SizedBox(height: 10.0),
-                getTextQuestion(question: 'Fecha Captura'),
-                SizedBox(height: 5.0),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: TextField(
-                    controller: _fechaCaptura,
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
-                          ),
-                        ),
-                        fillColor: Colors.grey[120],
-                        filled: true
-                    ),
-                    onTap: () async{
-                      DateTime pickeddate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100));
-
-                      if(pickeddate != null){
-                        setState(() {
-                          _fechaCaptura.text = DateFormat('yyyy-MM-dd').format(pickeddate);
-                        });
-                      }
-                    },
-                  ),
-                ),
 
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Fecha'),
@@ -595,19 +568,6 @@ class _DatosGeneralesState extends State<DatosGenerales> {
                         fillColor: Colors.grey[120],
                         filled: true
                     ),
-                    onTap: () async{
-                      DateTime pickeddate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100));
-
-                      if(pickeddate != null){
-                        setState(() {
-                          _fecha.text = DateFormat('yyyy-MM-dd').format(pickeddate);
-                        });
-                      }
-                    },
                   ),
                 ),
                 SizedBox(height: 10.0),

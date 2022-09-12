@@ -165,7 +165,29 @@ class _AportacionesEconomicasState extends State<AportacionesEconomicas> {
                   children: [
                     getTextCocepto(concepto: 'Total Semanal'),
                     SizedBox(width: 36.0),
-                    Expanded(child: getTextField(controller: _totalSemanalS),
+                    Expanded(child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: TextFormField(
+                          controller: _totalSemanalS,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                                ),
+                              ),
+                              fillColor: Colors.grey[120],
+                              filled: true
+                          ),
+                          onTap: () async{
+                            setState(() {
+                             //Metodo de suma semal
+                            });;
+                          }
+                      ),
+                    ),
                     ),
                   ],
                 ),
@@ -174,7 +196,30 @@ class _AportacionesEconomicasState extends State<AportacionesEconomicas> {
                   children: [
                     getTextCocepto(concepto: 'Total Mensual'),
                     SizedBox(width: 36.0),
-                    Expanded(child: getTextField(controller: _totalMensualS),
+                    Expanded(child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: TextFormField(
+                          controller: _totalMensualS,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                                ),
+                              ),
+                              fillColor: Colors.grey[120],
+                              filled: true
+                          ),
+                          onTap: () async{
+                            setState(() {
+
+                              //Metodo de suma mensual
+                            });;
+                          }
+                      ),
+                    ),
                     ),
                   ],
                 ),
@@ -308,8 +353,30 @@ class _AportacionesEconomicasState extends State<AportacionesEconomicas> {
                 Row(
                   children: [
                     getTextCocepto(concepto: 'Total Semanal'),
-                    SizedBox(width: 40.0),
-                    Expanded(child: getTextField(controller: _totalSemanalE),
+                    SizedBox(width: 36.0),
+                    Expanded(child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: TextFormField(
+                          controller: _totalSemanalE,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                                ),
+                              ),
+                              fillColor: Colors.grey[120],
+                              filled: true
+                          ),
+                          onTap: () async{
+                            setState(() {
+                              //Metodo de suma semal
+                            });;
+                          }
+                      ),
+                    ),
                     ),
                   ],
                 ),
@@ -317,8 +384,31 @@ class _AportacionesEconomicasState extends State<AportacionesEconomicas> {
                 Row(
                   children: [
                     getTextCocepto(concepto: 'Total Mensual'),
-                    SizedBox(width: 40.0),
-                    Expanded(child: getTextField(controller: _totalMensualE),
+                    SizedBox(width: 36.0),
+                    Expanded(child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: TextFormField(
+                          controller: _totalMensualE,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                                ),
+                              ),
+                              fillColor: Colors.grey[120],
+                              filled: true
+                          ),
+                          onTap: () async{
+                            setState(() {
+
+                              //Metodo de suma mensual
+                            });;
+                          }
+                      ),
+                    ),
                     ),
                   ],
                 ),

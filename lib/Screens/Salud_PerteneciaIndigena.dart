@@ -339,13 +339,30 @@ class _Salud_PertenenciaIndigenaState extends State<Salud_PertenenciaIndigena> {
                 getTextField(controller: _talla),
                 SizedBox(height: 5.0),
                 getTextQuestion(question: 'IMC'),
-                TextField(controller: IMC(),
-                  onTap: () async{
-                    setState(() {
-                      IMC();
-                    });;
-                  }
-                  ,),
+
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextFormField(
+                  controller: IMC(),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.black26, style: BorderStyle.solid
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2.0, color: Colors.blue, style: BorderStyle.solid
+                        ),
+                      ),
+                      fillColor: Colors.grey[120],
+                      filled: true
+                  ),
+                    onTap: () async{
+                      setState(() {
+                        IMC();
+                      });;
+                    }
+                ),
+              ),
                 SizedBox(height: 10.0),
                 getTextQuestion(question: 'Pueblo Indigena'),
                 //Menu desplegable pueblo indigena

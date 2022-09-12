@@ -74,9 +74,9 @@ class _AlimentacionState extends State<Alimentacion> {
                 ),
 
                 SizedBox(height: 10.0),
-                getTextEquipamiento(encabezado: 'EN LOS ULTIMOS 3 MESES, POR FALTA DE DINERO U OTROS RECURSOS...'),
+                getTextEquipamiento(encabezado: 'EN LOS ULTIMOS 3 MESES, POR FALTA DE DINERO \n U OTROS RECURSOS...'),
                 SizedBox(height: 10.0),
-                getTextQuestion(question: '1. ¿Alguna vez usted  o algún adulto en su hogar tuvo una alimentación basada en poca variedad de alimentos?'),
+                getTextQuestion(question: '1. ¿Alguna vez usted  o algún adulto en su hogar tuvo una alimentación basada \n en poca variedad de alimentos?'),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -144,7 +144,7 @@ class _AlimentacionState extends State<Alimentacion> {
                   ],
                 ),
                 SizedBox(height: 10.0),
-                getTextQuestion(question: '3. ¿Alguna vez usted  o algún adulto en su hogar comió menos de lo que piensa debia comer?'),
+                getTextQuestion(question: '3. ¿Alguna vez usted  o algún adulto en su hogar comió menos de lo que piensa \n debia comer?'),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -249,7 +249,7 @@ class _AlimentacionState extends State<Alimentacion> {
                   ],
                 ),
                 SizedBox(height: 10.0),
-                getTextQuestion(question: '6. ¿Alguna vez ustede o algún adulto de su hogar sólo comió una vez al día o dejo de come durante el día?'),
+                getTextQuestion(question: '6. ¿Alguna vez ustede o algún adulto de su hogar sólo comió una vez al día o dejó \n de come durante el día?'),
                 Row(
                   children: <Widget>[
                     //INE
@@ -291,9 +291,9 @@ class _AlimentacionState extends State<Alimentacion> {
                   color: Colors.black,
                 ),
                 SizedBox(height: 10.0),
-                getTextEquipamiento(encabezado: 'SI EN EL HOGAR NO HAY PERSONAS MENORES DE 18 AÑOS PASE A LA SECCIÓN 8. RESULTADOS'),
+                getTextEquipamiento(encabezado: 'SI EN EL HOGAR NO HAY PERSONAS MENORES DE 18 AÑOS \n PASE A LA SECCIÓN 8. RESULTADOS'),
                 SizedBox(height: 10.0),
-                getTextQuestion(question: '7. ¿Alguna vez algún menor de 18 años en su hogar tuvo una alimentación basada en poca variedad de alimentos?'),
+                getTextQuestion(question: '7. ¿Alguna vez algún menor de 18 años en su hogar tuvo una alimentación basada \n en poca variedad de alimentos?'),
                 Row(
                   children: <Widget>[
                     //INE
@@ -363,7 +363,7 @@ class _AlimentacionState extends State<Alimentacion> {
                   ],
                 ),
                 SizedBox(height: 10.0),
-                getTextQuestion(question: '9. ¿Alguna vez en su hogar tuvieron tuvieron que disminuir la cantidad servida en la comida a algún menor de 18 años?'),
+                getTextQuestion(question: '9. ¿Alguna vez en su hogar tuvieron tuvieron que disminuir la cantidad servida en \n la comida a algún menor de 18 años?'),
                 Row(
                   children: <Widget>[
                     //INE
@@ -468,7 +468,7 @@ class _AlimentacionState extends State<Alimentacion> {
                   ],
                 ),
                 SizedBox(height: 10.0),
-                getTextQuestion(question: '12. ¿Alguna vez algún menor de 18 años comió una vez al día o dejó de comer durante todo un día?'),
+                getTextQuestion(question: '12. ¿Alguna vez algún menor de 18 años comió una vez al día o dejó de comer \n durante todo un día?'),
                 Row(
                   children: <Widget>[
                     //INE

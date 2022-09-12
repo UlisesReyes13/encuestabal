@@ -1,10 +1,6 @@
+import 'package:encuestabal/Screens/Alimentacion.dart';
 import 'package:encuestabal/Screens/AportacionesEconomicas.dart';
-import 'package:encuestabal/Screens/ApoyosEnEspecie.dart';
-import 'package:encuestabal/Screens/DatosGenerales.dart';
-import 'package:encuestabal/Screens/Equipamiento.dart';
-import 'package:encuestabal/Screens/Remesas.dart';
 import 'package:flutter/material.dart';
-
 import 'Screens/LoginForm.dart';
 
 void main() {
@@ -20,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AportacionesEconomicas('1'),
+      home: Alimentacion('1'),
     );
   }
 }
