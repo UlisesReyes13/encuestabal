@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:encuestabal/Model/Agua.dart';
 import 'package:encuestabal/Model/CaracteristicasCasa.dart';
 import 'package:encuestabal/Model/Drenaje.dart';
+import 'package:encuestabal/Model/EquipamientoModel.dart';
 import 'package:encuestabal/Model/EscolaridadSeguridadSocial.dart';
 import 'package:encuestabal/Model/EstadoCasaConstruccionModel.dart';
 import 'package:encuestabal/Model/EstructuraFamiliarModel.dart';
@@ -30,6 +31,8 @@ class DbHelper {
   static const String Table_Salud= 'saludPertenenciaIndigena';
   static const String Table_Vivienda = 'estadoDeLaCasaYConstruccion';
   static const String Table_Casa = 'caracteristicas_Casa';
+  //Nombre Tabala
+  static const String Table_Equipamiento = 'equipamiento';
 
   static const int Version = 3;
 
@@ -169,6 +172,73 @@ class DbHelper {
   static const String C_cocinaSeparada = 'cocinaSeparada';
   static const String C_cuartoBanioExclusivo = 'cuartoBanioExclusivo';
 
+  //Tabla Equipamiento
+  static const String C_pk_equipamientosRefri = 'pk_equipamientosRefri';
+  static const String C_txt_desc_equipamientosRefri = 'txt_desc_equipamientosRefri';
+  static const String C_tieneRefri = 'tieneRefri';
+  static const String C_sirveRefri = 'sirveRefri';
+  static const String C_pk_equipamientosEstufa = 'pk_equipamientosEstufa';
+  static const String C_txt_desc_equipamientosEstufa = 'txt_desc_equipamientosEstufa';
+  static const String C_tieneEstufa = 'tieneEstufa';
+  static const String C_sirveEstufa = 'sirveEstufa';
+  static const String C_pk_equipamientosVideoDVDBlueRay = 'pk_equipamientosVideoDVDBlueRay';
+  static const String C_txt_desc_equipamientosVideoDVDBlueRay = 'txt_desc_equipamientosVideoDVDBlueRay';
+  static const String C_tieneVideoDVDBlueRay = 'tieneVideoDVDBlueRay';
+  static const String C_sirveVideoDVDBlueRay = 'sirveVideoDVDBlueRay';
+  static const String C_pk_equipamientosLavadora = 'pk_equipamientosLavadora';
+  static const String C_txt_desc_equipamientosLavadora = 'txt_desc_equipamientosLavadora';
+  static const String C_tieneLavadora = 'tieneLavadora';
+  static const String C_sirveLavadora = 'sirveLavadora';
+  static const String C_pk_equipamientosLicuadora = 'pk_equipamientosLicuadora';
+  static const String C_txt_desc_equipamientosLicuadora = 'txt_desc_equipamientosLicuadora';
+  static const String C_tieneLicuadora = 'tieneLicuadora';
+  static const String C_sirveLicuadora = 'sirveLicuadora';
+  static const String C_pk_equipamientosTelevision = 'pk_equipamientosTelevision';
+  static const String C_txt_desc_equipamientosTelevision = 'txt_desc_equipamientosTelevision';
+  static const String C_tieneTelevision = 'tieneTelevision';
+  static const String C_sirveTelevision = 'sirveTelevision';
+  static const String C_pk_equipamientosRadio = 'pk_equipamientosRadio';
+  static const String C_txt_desc_equipamientosRadio = 'txt_desc_equipamientosRadio';
+  static const String C_tieneRadio = 'tieneRadio';
+  static const String C_sirveRadio = 'sirveRadio';
+  static const String C_pk_equipamientosSala = 'pk_equipamientosSala';
+  static const String C_txt_desc_equipamientosSala = 'txt_desc_equipamientosSala';
+  static const String C_tieneSala = 'tieneSala';
+  static const String C_sirveSala = 'sirveSala';
+  static const String C_pk_equipamientosComedor = 'pk_equipamientosComedor';
+  static const String C_txt_desc_equipamientosComedor = 'txt_desc_equipamientosComedor';
+  static const String C_tieneComedor = 'tieneComedor';
+  static const String C_sirveComedor = 'sirveComedor';
+  static const String C_pk_equipamientosAutoMovil = 'pk_equipamientosAutoMovil';
+  static const String C_txt_desc_equipamientosAutoMovil = 'txt_desc_equipamientosAutoMovil';
+  static const String C_tieneAutoMovil = 'tieneAutoMovil';
+  static const String C_sirveAutoMovil = 'sirveAutoMovil';
+  static const String C_pk_equipamientosCama = 'pk_equipamientosCama';
+  static const String C_txt_desc_equipamientosCama = 'txt_desc_equipamientosCama';
+  static const String C_tieneCama = 'tieneCama';
+  static const String C_sirveCama = 'sirveCama';
+  static const String C_pk_equipamientosCelular = 'pk_equipamientosCelular';
+  static const String C_txt_desc_equipamientosCelular = 'txt_desc_equipamientosCelular';
+  static const String C_tieneCelular = 'tieneCelular';
+  static const String C_sirveCelular = 'sirveCelular';
+  static const String C_pk_equipamientosMotocicleta = 'pk_equipamientosMotocicleta';
+  static const String C_txt_desc_equipamientosMotocicleta = 'txt_desc_equipamientosMotocicleta';
+  static const String C_tieneMotocicleta = 'tieneMotocicleta';
+  static const String C_sirveMotocicleta = 'sirveMotocicleta';
+  static const String C_pk_equipamientosComputadora = 'pk_equipamientosComputadora';
+  static const String C_txt_desc_equipamientosComputadora = 'txt_desc_equipamientosComputadora';
+  static const String C_tieneComputadora = 'tieneComputadora';
+  static const String C_sirveComputadora = 'sirveComputadora';
+  static const String C_pk_equipamientosHorno = 'pk_equipamientosHorno';
+  static const String C_txt_desc_equipamientosHorno = 'txt_desc_equipamientosHorno';
+  static const String C_tieneHorno = 'tieneHorno';
+  static const String C_sirveHorno = 'sirveHorno';
+  static const String C_pk_equipamientosTelefono = 'pk_equipamientosTelefono';
+  static const String C_txt_desc_equipamientosTelefono = 'txt_desc_equipamientosTelefono';
+  static const String C_tieneTelefono = 'tieneTelefono';
+  static const String C_sirveTelefono = 'sirveTelefono';
+  static const String C_CondicionesGenerales = 'CondicionesGenerales';
+
 
   Future<Database> get db async {
     if (_db != null) {
@@ -194,6 +264,7 @@ class DbHelper {
     await db.execute("CREATE TABLE $Table_Salud ($C_Folio int,$C_ClaveCapacidadDiferente TEXT,$C_OrdenCapacidadDiferente TEXT,$C_CapacidadDiferente TEXT,$C_ClaveCondicionesSalud TEXT,$C_OrdenCondicionesSalud TEXT,$C_CondicionesSalud TEXT,$C_ClaveAdiccion TEXT,$C_OrdenAdiccion TEXT,$C_Adiccion TEXT,$C_peso int,$C_talla int,$C_imc double,$C_ClaveEtniaIndigena TEXT,$C_OrdenEtniaIndigena TEXT,$C_EtniaIndigena TEXT);");
     await db.execute("CREATE TABLE $Table_Vivienda ($C_Folio int,$C_ClaveTipoVivienda TEXT,$C_OrdenTipoVivienda TEXT,$C_TipoVivienda TEXT,$C_ClaveTipoPiso TEXT,$C_OrdenTipoPiso TEXT,$C_TipoPiso TEXT,$C_ClaveTenencia TEXT,$C_OrdenTenencia TEXT,$C_Tenencia TEXT,$C_ClaveTecho TEXT,$C_OrdenTecho TEXT,$C_Techo TEXT,$C_ClaveTipoMuro TEXT,$C_OrdenTipoMuro TEXT,$C_TipoMuro TEXT);");
     await db.execute("CREATE TABLE $Table_Casa ($C_Folio int,$C_numCuartos TEXT ,$C_cuartosDormir TEXT,$C_cocinaSeparada TEXT,$C_cuartoBanioExclusivo TEXT);");
+    await db.execute("CREATE TABLE $Table_Equipamiento ($C_Folio int,$C_pk_equipamientosRefri TEXT, $C_txt_desc_equipamientosRefri TEXT, $C_tieneRefri TEXT, $C_sirveRefri TEXT, $C_pk_equipamientosEstufa TEXT, $C_txt_desc_equipamientosEstufa TEXT, $C_tieneEstufa TEXT, $C_sirveEstufa TEXT, $C_pk_equipamientosVideoDVDBlueRay TEXT, $C_txt_desc_equipamientosVideoDVDBlueRay TEXT, $C_tieneVideoDVDBlueRay TEXT, $C_sirveVideoDVDBlueRay TEXT, $C_pk_equipamientosLavadora TEXT, $C_txt_desc_equipamientosLavadora TEXT, $C_tieneLavadora TEXT, $C_sirveLavadora TEXT, $C_pk_equipamientosLicuadora TEXT, $C_txt_desc_equipamientosLicuadora TEXT, $C_tieneLicuadora TEXT, $C_sirveLicuadora TEXT, $C_pk_equipamientosTelevision TEXT, $C_txt_desc_equipamientosTelevision TEXT, $C_tieneTelevision TEXT, $C_sirveTelevision TEXT, $C_pk_equipamientosRadio TEXT, $C_txt_desc_equipamientosRadio TEXT, $C_tieneRadio TEXT, $C_sirveRadio TEXT, $C_pk_equipamientosSala TEXT, $C_txt_desc_equipamientosSala TEXT, $C_tieneSala TEXT, $C_sirveSala TEXT, $C_pk_equipamientosComedor TEXT, $C_txt_desc_equipamientosComedor TEXT, $C_tieneComedor TEXT, $C_sirveComedor TEXT, $C_pk_equipamientosAutoMovil TEXT, $C_txt_desc_equipamientosAutoMovil TEXT, $C_tieneAutoMovil TEXT, $C_sirveAutoMovil TEXT, $C_pk_equipamientosCama TEXT, $C_txt_desc_equipamientosCama TEXT, $C_tieneCama TEXT, $C_sirveCama TEXT, $C_pk_equipamientosCelular TEXT, $C_txt_desc_equipamientosCelular TEXT, $C_tieneCelular TEXT, $C_sirveCelular TEXT, $C_pk_equipamientosMotocicleta TEXT, $C_txt_desc_equipamientosMotocicleta TEXT, $C_tieneMotocicleta TEXT, $C_sirveMotocicleta TEXT, $C_pk_equipamientosComputadora TEXT, $C_txt_desc_equipamientosComputadora TEXT, $C_tieneComputadora TEXT, $C_sirveComputadora TEXT, $C_pk_equipamientosHorno TEXT, $C_txt_desc_equipamientosHorno TEXT, $C_tieneHorno TEXT, $C_sirveHorno TEXT, $C_pk_equipamientosTelefono TEXT, $C_txt_desc_equipamientosTelefono TEXT, $C_tieneTelefono TEXT, $C_sirveTelefono TEXT, $C_CondicionesGenerales TEXT );");
 
     //NOMBRE ASENTAMIENTO
     await db.execute("CREATE TABLE Asentamientos (NombreAsentamientos TEXT);");
@@ -688,6 +759,10 @@ class DbHelper {
     return res;
   }
 
-
+  Future<int> saveEquipamiento( EquipamientoMovil equipamientoMovil)async {
+    var dbClient = await db;
+    var res = await dbClient.insert(Table_Equipamiento, equipamientoMovil.toMap());
+    return res;
+  }
 
 }

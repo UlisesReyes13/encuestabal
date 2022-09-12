@@ -1,6 +1,8 @@
 import 'package:encuestabal/Screens/AportacionesEconomicas.dart';
+import 'package:encuestabal/Screens/ApoyosEnEspecie.dart';
 import 'package:encuestabal/Screens/DatosGenerales.dart';
 import 'package:encuestabal/Screens/Equipamiento.dart';
+import 'package:encuestabal/Screens/Remesas.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/LoginForm.dart';

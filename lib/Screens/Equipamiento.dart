@@ -1,6 +1,10 @@
+import 'package:encuestabal/Comm/comHelper.dart';
 import 'package:encuestabal/Comm/genTextEquipamiento.dart';
 import 'package:encuestabal/Comm/genTextFolio.dart';
 import 'package:encuestabal/Comm/genTextQuestion.dart';
+import 'package:encuestabal/DatabaseHandler/DbHelper.dart';
+import 'package:encuestabal/Model/EquipamientoModel.dart';
+import 'package:encuestabal/Screens/AportacionesEconomicas.dart';
 import 'package:encuestabal/Screens/Caracteristicas_Casa.dart';
 import 'package:flutter/material.dart';
 import 'package:searchfield/searchfield.dart';
@@ -114,6 +118,98 @@ class _EquipaminetoState extends State<Equipamineto> {
 
   List<String> _Condiciones = ['Buena','Regular','Mala'];
   String selectedItem = 'Seleccionar';
+
+  var dbHelper;
+
+  @override
+  void initState() {
+
+    super.initState();
+    dbHelper = DbHelper();
+  }
+
+  insertDatos() async {
+
+    EquipamientoMovil DModel = EquipamientoMovil
+      (folio: int.parse(widget.folio),
+        pk_equipamientosRefri: "1",
+        txt_desc_equipamientosRefri: "Refrigerador",
+        tieneRefri: _refrigerador.name,
+        sirveRefri: _refrigeradorSirve.name,
+        pk_equipamientosEstufa: "2",
+        txt_desc_equipamientosEstufa: "Estufa",
+        tieneEstufa: _estufa.name,
+        sirveEstufa: _estufaSirve.name,
+        pk_equipamientosVideoDVDBlueRay: "3",
+        txt_desc_equipamientosVideoDVDBlueRay: "VideoDVDBlueRay",
+        tieneVideoDVDBlueRay: _video.name,
+        sirveVideoDVDBlueRay: _videoSirve.name,
+        pk_equipamientosLavadora: "4",
+        txt_desc_equipamientosLavadora: "Lavadora",
+        tieneLavadora: _lavadora.name,
+        sirveLavadora: _lavadoraSirve.name,
+        pk_equipamientosLicuadora: "5",
+        txt_desc_equipamientosLicuadora: "Licuadora",
+        tieneLicuadora: _licuadora.name,
+        sirveLicuadora: _licuadoraSirve.name,
+        pk_equipamientosTelevision: "6",
+        txt_desc_equipamientosTelevision: "Television",
+        tieneTelevision: _television.name,
+        sirveTelevision: _televisonSirve.name,
+        pk_equipamientosRadio: "7",
+        txt_desc_equipamientosRadio: "Radio",
+        tieneRadio: _radio.name,
+        sirveRadio: _radioSirve.name,
+        pk_equipamientosSala: "8",
+        txt_desc_equipamientosSala: "Sala",
+        tieneSala: _sala.name,
+        sirveSala: _salaSirve.name,
+        pk_equipamientosComedor: "9",
+        txt_desc_equipamientosComedor: "Comedor",
+        tieneComedor: _comedor.name,
+        sirveComedor: _comedorSirve.name,
+        pk_equipamientosAutoMovil: "10",
+        txt_desc_equipamientosAutoMovil: "Automovil",
+        tieneAutoMovil: _automovil.name,
+        sirveAutoMovil: _automovilSirve.name,
+        pk_equipamientosCama: "11",
+        txt_desc_equipamientosCama: "Cama",
+        tieneCama: _cama.name,
+        sirveCama: _camaSirve.name,
+        pk_equipamientosCelular: "12",
+        txt_desc_equipamientosCelular: "Celular",
+        tieneCelular: _celular.name,
+        sirveCelular: _celularSirve.name,
+        pk_equipamientosMotocicleta: "13",
+        txt_desc_equipamientosMotocicleta:"Motocicleta" ,
+        tieneMotocicleta: _motocicleta.name,
+        sirveMotocicleta: _motocicletaSirve.name,
+        pk_equipamientosComputadora: "14",
+        txt_desc_equipamientosComputadora: "Computadora",
+        tieneComputadora: _computadora.name,
+        sirveComputadora: _computadoraSirve.name,
+        pk_equipamientosHorno: "15",
+        txt_desc_equipamientosHorno: "Horno",
+        tieneHorno: _horno.name,
+        sirveHorno: _hornoSirve.name,
+        pk_equipamientosTelefono: "16",
+        txt_desc_equipamientosTelefono: "Telefono",
+        tieneTelefono: _telefono.name,
+        sirveTelefono: _telefonoSirve.name,
+        CondicionesGenerales: _condiciones.text.toString()
+    );
+
+    await dbHelper.saveEquipamiento(DModel).then((equipamientoMovil) {
+      alertDialog(context, "Se registro correctamente");
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context){
+        return new AportacionesEconomicas(widget.folio);
+      }
+      ));
+    }).catchError((error) {
+      print(error);
+      alertDialog(context, "Error: No se guardaron los datos");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1292,9 +1388,7 @@ class _EquipaminetoState extends State<Equipamineto> {
                   margin: EdgeInsets.all(20.0),
                   width: double.infinity,
                   child: FlatButton.icon(
-                    onPressed: (){
-
-                    },
+                    onPressed:insertDatos,
                     icon: Icon(Icons.arrow_forward,color: Colors.white),
                     label: Text('Continuar', style: TextStyle(color: Colors.white),),
                   ),

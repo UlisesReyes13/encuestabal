@@ -64,6 +64,8 @@ class _ApoyosEnEspecieState extends State<ApoyosEnEspecie> {
                 getTextField(controller: _frecuenciaApoyo),
 
                 SizedBox(height: 10.0),
+
+
                 Container(
                   margin: EdgeInsets.all(20.0),
                   width: double.infinity,
